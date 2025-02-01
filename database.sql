@@ -1,56 +1,92 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: global_hotels_booking
--- ------------------------------------------------------
--- Server version	8.0.41
+-- Host: 127.0.0.1:3306
+-- Generation Time: Feb 01, 2025 at 03:47 AM
+-- Server version: 9.1.0
+-- PHP Version: 8.3.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `reports`
+-- Database: `database`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotels table`, created by Awab-Ahmed-Os
+--
+
+DROP TABLE IF EXISTS `hotels table`;
+CREATE TABLE IF NOT EXISTS `hotels table` (
+  `HotelID` int NOT NULL,
+  `Hotel_name` varchar(50) NOT NULL,
+  `Country` varchar(50) NOT NULL,
+  `City` varchar(50) NOT NULL,
+  `Address` text NOT NULL,
+  `Star_rate` int NOT NULL,
+  `Description` text NOT NULL,
+  `Amenities` json NOT NULL,
+  `ImageURLs` text NOT NULL,
+  PRIMARY KEY (`HotelID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`, created by Mozan-Abdelsamie
 --
 
 DROP TABLE IF EXISTS `reports`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reports` (
+CREATE TABLE IF NOT EXISTS `reports` (
   `ReportID` int NOT NULL AUTO_INCREMENT,
   `UserID` int DEFAULT NULL,
   `ReportType` enum('Bookings','Revenues','Users','Hotels','Feedbacks') DEFAULT NULL,
   `ReportData` blob,
   `ReportDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ReportID`),
-  KEY `UserID` (`UserID`),
-  CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `reports`
+-- Table structure for table `rooms table`, created by Awab-Ahmed-Os
 --
 
-LOCK TABLES `reports` WRITE;
-/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
-/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `rooms table`;
+CREATE TABLE IF NOT EXISTS `rooms table` (
+  `RoomID` int NOT NULL,
+  `HotelID` int NOT NULL,
+  `Room_type` enum('Single','Double','Suite') NOT NULL,
+  `Occupancy_adults` int NOT NULL,
+  `Occupancy_children` int NOT NULL,
+  `Price_per_night` decimal(10,2) NOT NULL,
+  `Availability` tinyint(1) NOT NULL,
+  `Amenities` json NOT NULL,
+  `Bed_type` enum('King','Queen','Twin') NOT NULL,
+  PRIMARY KEY (`RoomID`),
+  UNIQUE KEY `Foreign Key` (`HotelID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `users` created by Mozan-Abdelsamie
 --
 
 DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `UserID` int NOT NULL AUTO_INCREMENT,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
@@ -64,24 +100,117 @@ CREATE TABLE `users` (
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Email` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Constraints for dumped tables
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Constraints for table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Constraints for table `rooms table`
+--
+ALTER TABLE `rooms table`
+  ADD CONSTRAINT `rooms table_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-31 13:59:54
+
+USE global_hotels_booking;
+
+-- Insert 5 travelers information samples to the users table, created by Mozan-Abdelsamie
+INSERT INTO users (Email, Password, FName, LName, BirthDate, Phone, Role, SupportContact_message, SupportContact_preference) VALUES
+('alice.brown@gmail.com', 'SecurePass1!', 'Alice', 'Brown', '1987-06-30', '+1-555-8765', 'Traveler', 'Question about reservation', 'Chatbox'),
+('bob.white@yahoo.com', 'SecurePass2$', 'Bob', 'White', '1975-04-10', '+44-555-3456', 'Traveler', 'Need help with payment', 'Email'),
+('carol.johnson@mail.com', 'SecurePass3#', 'Carol', 'Johnson', '1992-09-12', '+61-555-6543', 'Traveler', NULL, NULL),
+('dave.williams@gmail.com', 'SecurePass4%', 'Dave', 'Williams', '1983-11-14', '+33-555-7890', 'Traveler', NULL, NULL),
+('eve.miller@hotmail.com', 'SecurePass5^', 'Eve', 'Miller', '1995-07-19', '+91-555-4321', 'Traveler', NULL, NULL);
+
+-- Insert 2 admins samples to the users table, created by Mozan-Abdelsamie
+INSERT INTO users (Email, Password, FName, LName, BirthDate, Phone, Role, SupportContact_message, SupportContact_preference) VALUES
+('john.doe@hotelbooking.com', 'AdminPass1*', 'John', 'Doe', '1980-05-15', '+1-555-2345', 'Admin', 'Reply: Question about reservation', 'chatbot'),
+('jane.smith@hotelbooking.com', 'AdminPass2&', 'Jane', 'Smith', '1982-08-25', '+44-555-6789', 'Admin', 'Reply: Need help with payment', 'Email');
+
+-- Create a procedure to authenticate user, created by Mozan-Abdelsamie
+DELIMITER $$
+
+CREATE PROCEDURE AuthenticateUser(IN userEmail VARCHAR(50), IN userPassword VARCHAR(50))
+BEGIN
+    DECLARE userRole ENUM('Traveler', 'Admin');
+    DECLARE authResult VARCHAR(100);
+
+    -- Check if user exists and fetch their role
+    SELECT Role INTO userRole
+    FROM users
+    WHERE Email = userEmail AND Password = userPassword;
+
+    -- Determine the authentication result based on the role
+    IF userRole = 'Admin' THEN
+        SET authResult = 'Authenticated as Admin';
+    ELSEIF userRole = 'Traveler' THEN
+        SET authResult = 'Authenticated as Traveler';
+    ELSE
+        SET authResult = 'Authentication Failed';
+    END IF;
+
+    -- Display the authentication result
+    SELECT authResult AS AuthenticationResult;
+END $$
+
+DELIMITER ;
+
+-- Select all rows from the users table to verify insertion
+SELECT * FROM users;
+-- Show the status of all procedures in the database
+SHOW PROCEDURE STATUS WHERE Db = 'global_hotels_booking';
+SHOW CREATE PROCEDURE AuthenticateUser;
+
+-- Update the SupportContact_message field for the specific row using primary key
+UPDATE users
+SET SupportContact_message = 'Chatbot'
+WHERE UserID = 1;
+
+UPDATE users
+SET SupportContact_message = 'Chatbot'
+WHERE UserID = 6;
+
+-- Select the specific row to verify the update
+SELECT * FROM users;
+
+-- Insert reports data samples, created by Mozan-Abdelsamie
+-- by admin John Doe (UserID = 6) 
+INSERT INTO reports (UserID, ReportType, ReportData, ReportDate) VALUES
+(6, 'Bookings', 'Booking data excel file', CURRENT_TIMESTAMP),
+(6, 'Revenues', 'Revenues data PDF file', CURRENT_TIMESTAMP);
+
+-- by admin Jane Smith (UserID = 7)
+INSERT INTO reports (UserID, ReportType, ReportData, ReportDate) VALUES
+(7, 'Users', 'Users data excel file', CURRENT_TIMESTAMP),
+(7, 'Hotels', 'Hotels data PDF file', CURRENT_TIMESTAMP),
+(7, 'Feedbacks', 'Feedbacks data PDF file', CURRENT_TIMESTAMP);
+
+SELECT * FROM reports;
+SHOW TABLES;
+DESCRIBE users;
+
+ALTER TABLE users
+MODIFY COLUMN FName VARCHAR(50) NOT NULL,
+MODIFY COLUMN Role ENUM('Traveler', 'Admin') NOT NULL;
+DESCRIBE users;
+
+DESCRIBE reports;
+ALTER TABLE reports
+MODIFY COLUMN ReportType ENUM('Bookings','Revenues','Users','Hotels','Feedbacks') NOT NULL,
+MODIFY COLUMN ReportData BLOB NOT NULL,
+MODIFY COLUMN ReportDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+DESCRIBE reports;
+
+
+
