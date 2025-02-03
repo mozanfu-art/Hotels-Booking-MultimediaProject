@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 03, 2025 at 12:47 AM
+-- Generation Time: Feb 03, 2025 at 08:40 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -53,6 +53,31 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `FeedbackID` int NOT NULL AUTO_INCREMENT,
+  `UserID` int DEFAULT NULL,
+  `HotelID` int DEFAULT NULL,
+  `Feedback` text,
+  `FeedbackDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`FeedbackID`),
+  KEY `UserID` (`UserID`),
+  KEY `HotelID` (`HotelID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`FeedbackID`, `UserID`, `HotelID`, `Feedback`, `FeedbackDate`) VALUES
+(1, 1, 1, 'Excellent service!', '2025-02-03 16:07:47');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hotels table`
 --
 
@@ -78,6 +103,32 @@ INSERT INTO `hotels table` (`HotelID`, `Hotel_name`, `Country`, `City`, `Address
 (1, 'Sunrise Hotel', 'Sudan', 'Khartoum', '123 Nile Street', 5, 'A luxurious hotel with a stunning view of the Nile.', '{\"Gym\": true, \"Pool\": true, \"WiFi\": true}', 'url1'),
 (2, 'Desert Oasis', 'Egypt', 'Cairo', '456 Pyramid Road', 4, 'A charming hotel near the Pyramids.', '{\"Spa\": true, \"Pool\": true, \"WiFi\": true}', 'url2'),
 (3, 'Mountain Retreat', 'Ethiopia', 'Addis Ababa', '789 Mountain Road', 3, 'A cozy retreat in the mountains.', '{\"Gym\": true, \"WiFi\": true}', 'url3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotel_reviews`
+--
+
+DROP TABLE IF EXISTS `hotel_reviews`;
+CREATE TABLE IF NOT EXISTS `hotel_reviews` (
+  `ReviewID` int NOT NULL AUTO_INCREMENT,
+  `UserID` int DEFAULT NULL,
+  `HotelID` int DEFAULT NULL,
+  `Star_rate` int DEFAULT NULL,
+  `Review` text,
+  `ReviewDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ReviewID`),
+  KEY `UserID` (`UserID`),
+  KEY `HotelID` (`HotelID`)
+) ;
+
+--
+-- Dumping data for table `hotel_reviews`
+--
+
+INSERT INTO `hotel_reviews` (`ReviewID`, `UserID`, `HotelID`, `Star_rate`, `Review`, `ReviewDate`) VALUES
+(1, 1, 1, 5, 'amazing!', '2025-02-03 16:09:26');
 
 -- --------------------------------------------------------
 
@@ -234,6 +285,20 @@ INSERT INTO `users` (`UserID`, `Email`, `Password`, `FName`, `LName`, `BirthDate
 --
 
 --
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
+
+--
+-- Constraints for table `hotel_reviews`
+--
+ALTER TABLE `hotel_reviews`
+  ADD CONSTRAINT `hotel_reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `hotel_reviews_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
+
+--
 -- Constraints for table `reports`
 --
 ALTER TABLE `reports`
@@ -245,13 +310,6 @@ ALTER TABLE `reports`
 ALTER TABLE `reservations table`
   ADD CONSTRAINT `reservations table_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `reservations table_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
-
---
--- Constraints for table `reserver_rooms`
---
-ALTER TABLE `reserver_rooms`
-  ADD CONSTRAINT `reserver_rooms_ibfk_1` FOREIGN KEY (`ReservationID`) REFERENCES `reservations table` (`reservationsID`),
-  ADD CONSTRAINT `reserver_rooms_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `rooms table` (`RoomID`);
 
 --
 -- Constraints for table `rooms table`
