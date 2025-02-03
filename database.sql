@@ -140,11 +140,11 @@ INSERT INTO `reservations table` (`reservationsID`, `UserID`, `HotelID`, `CheckI
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reserver_rooms`
+-- Table structure for table `reserved_rooms`
 --
 
-DROP TABLE IF EXISTS `reserver_rooms`;
-CREATE TABLE IF NOT EXISTS `reserver_rooms` (
+DROP TABLE IF EXISTS `reserved_rooms`;
+CREATE TABLE IF NOT EXISTS `reserved_rooms` (
   `Reserved_rooms_ID` int NOT NULL,
   `ReservationID` int NOT NULL,
   `RoomID` int NOT NULL,
@@ -155,10 +155,10 @@ CREATE TABLE IF NOT EXISTS `reserver_rooms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `reserver_rooms`
+-- Dumping data for table `reserved_rooms`
 --
 
-INSERT INTO `reserver_rooms` (`Reserved_rooms_ID`, `ReservationID`, `RoomID`, `Quantity`) VALUES
+INSERT INTO `reserved_rooms` (`Reserved_rooms_ID`, `ReservationID`, `RoomID`, `Quantity`) VALUES
 (55, 5, 2, 1),
 (77, 100, 1, 1);
 
