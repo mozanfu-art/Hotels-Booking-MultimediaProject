@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 02, 2025 at 02:42 PM
+-- Generation Time: Feb 03, 2025 at 12:47 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -110,6 +110,61 @@ INSERT INTO `reports` (`ReportID`, `UserID`, `ReportType`, `ReportData`, `Report
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reservations table`
+--
+
+DROP TABLE IF EXISTS `reservations table`;
+CREATE TABLE IF NOT EXISTS `reservations table` (
+  `reservationsID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `HotelID` int NOT NULL,
+  `CheckIn_date` date NOT NULL,
+  `CheckOut_Date` date NOT NULL,
+  `Amount` decimal(10,0) NOT NULL,
+  `Status` enum('confirmed','pending','cancelled','completed') NOT NULL,
+  `Special_Request` text NOT NULL,
+  `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`reservationsID`),
+  UNIQUE KEY `UserID` (`UserID`),
+  UNIQUE KEY `HotelID` (`HotelID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reservations table`
+--
+
+INSERT INTO `reservations table` (`reservationsID`, `UserID`, `HotelID`, `CheckIn_date`, `CheckOut_Date`, `Amount`, `Status`, `Special_Request`, `CreatedAt`) VALUES
+(5, 3, 2, '2025-02-12', '2025-02-14', 70, 'pending', '', '2025-02-02 20:41:09'),
+(100, 1, 1, '0000-00-00', '0000-00-00', 150, 'confirmed', '', '2025-02-02 20:38:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reserver_rooms`
+--
+
+DROP TABLE IF EXISTS `reserver_rooms`;
+CREATE TABLE IF NOT EXISTS `reserver_rooms` (
+  `Reserved_rooms_ID` int NOT NULL,
+  `ReservationID` int NOT NULL,
+  `RoomID` int NOT NULL,
+  `Quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`Reserved_rooms_ID`),
+  UNIQUE KEY `ReservationID` (`ReservationID`),
+  UNIQUE KEY `RoomID` (`RoomID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reserver_rooms`
+--
+
+INSERT INTO `reserver_rooms` (`Reserved_rooms_ID`, `ReservationID`, `RoomID`, `Quantity`) VALUES
+(55, 5, 2, 1),
+(77, 100, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rooms table`
 --
 
@@ -183,6 +238,20 @@ INSERT INTO `users` (`UserID`, `Email`, `Password`, `FName`, `LName`, `BirthDate
 --
 ALTER TABLE `reports`
   ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
+-- Constraints for table `reservations table`
+--
+ALTER TABLE `reservations table`
+  ADD CONSTRAINT `reservations table_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `reservations table_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
+
+--
+-- Constraints for table `reserver_rooms`
+--
+ALTER TABLE `reserver_rooms`
+  ADD CONSTRAINT `reserver_rooms_ibfk_1` FOREIGN KEY (`ReservationID`) REFERENCES `reservations table` (`reservationsID`),
+  ADD CONSTRAINT `reserver_rooms_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `rooms table` (`RoomID`);
 
 --
 -- Constraints for table `rooms table`
