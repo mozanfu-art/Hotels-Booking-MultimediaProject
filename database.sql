@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 03, 2025 at 08:40 PM
+-- Generation Time: Feb 03, 2025 at 11:26 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -49,6 +49,31 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `AuthenticateUser` (IN `userEmail` V
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `existing_reservations`
+--
+
+DROP TABLE IF EXISTS `existing_reservations`;
+CREATE TABLE IF NOT EXISTS `existing_reservations` (
+  `ReservationID` int DEFAULT NULL,
+  `UserID` int DEFAULT NULL,
+  `ReviewID` int DEFAULT NULL,
+  `Status` enum('Completed') DEFAULT NULL,
+  `CreatedAt` timestamp NULL DEFAULT NULL,
+  KEY `ReservationID` (`ReservationID`),
+  KEY `UserID` (`UserID`),
+  KEY `ReviewID` (`ReviewID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `existing_reservations`
+--
+
+INSERT INTO `existing_reservations` (`ReservationID`, `UserID`, `ReviewID`, `Status`, `CreatedAt`) VALUES
+(1, 1, 1, 'Completed', '2025-02-03 23:04:50');
 
 -- --------------------------------------------------------
 
@@ -121,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `hotel_reviews` (
   PRIMARY KEY (`ReviewID`),
   KEY `UserID` (`UserID`),
   KEY `HotelID` (`HotelID`)
-) ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `hotel_reviews`
@@ -129,6 +154,33 @@ CREATE TABLE IF NOT EXISTS `hotel_reviews` (
 
 INSERT INTO `hotel_reviews` (`ReviewID`, `UserID`, `HotelID`, `Star_rate`, `Review`, `ReviewDate`) VALUES
 (1, 1, 1, 5, 'amazing!', '2025-02-03 16:09:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE IF NOT EXISTS `payment` (
+  `PaymentID` int NOT NULL AUTO_INCREMENT,
+  `ReservationID` int DEFAULT NULL,
+  `Payment_method` enum('Credit Card','Cash') DEFAULT NULL,
+  `Amount` decimal(10,2) DEFAULT NULL,
+  `TransactionID` varchar(255) DEFAULT NULL,
+  `Currency` varchar(10) DEFAULT NULL,
+  `Status` enum('Success','Failed','Pending') DEFAULT NULL,
+  `PaymentDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`PaymentID`),
+  KEY `ReservationID` (`ReservationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`PaymentID`, `ReservationID`, `Payment_method`, `Amount`, `TransactionID`, `Currency`, `Status`, `PaymentDate`) VALUES
+(1, 1, 'Credit Card', 11970.00, 'TRX123456789', 'INR', 'Success', '2025-02-03 23:03:58');
 
 -- --------------------------------------------------------
 
@@ -290,13 +342,6 @@ INSERT INTO `users` (`UserID`, `Email`, `Password`, `FName`, `LName`, `BirthDate
 ALTER TABLE `feedback`
   ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
-
---
--- Constraints for table `hotel_reviews`
---
-ALTER TABLE `hotel_reviews`
-  ADD CONSTRAINT `hotel_reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
-  ADD CONSTRAINT `hotel_reviews_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
 
 --
 -- Constraints for table `reports`
