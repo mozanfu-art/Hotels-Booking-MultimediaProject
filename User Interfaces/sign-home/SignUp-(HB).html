@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="./Css/Sign-Up.css" />
+</head>
+<title>
+    Create Account
+</title>
+
+<body>
+    <div class="bar">
+        <a href="./Start-(HB).html"><img src="./Icon/Back Arrow.png" width="35px"></a>
+    </div><br>
+    <div class="container">
+        <img src="./Icon/Sign in.ico" width="10%" />
+        <h1>
+            <font color="#004d40">Create Your Account</font>
+            </h1<br>
+            <form action="" method="POST">
+                <p><input type="txt" required="true" placeholder="First Name" name="FNM" style="width:20%;"
+                        class="input">
+                    <input type="txt" required="true" placeholder="Last Name" name="LNM" style="width:20%;"
+                        class="input">
+                </p>
+                <p><input type="email" required="true" name="Email"
+                        placeholder="User Name                                            @####.com" class="input"></p>
+                <p><input class="input" id="password" name="password" type="password" pattern="^\S{6,}$"
+                        onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.pass.pattern = this.value;"
+                        placeholder="Password" required>
+                <p><input class="input" id="pass" name="pass" type="password" pattern="^\S{6,}$"
+                        onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                        placeholder="Confirm Password" required>
+                <p><input type="submit" class="btn" style="width:40%;height:30px;" value="Create"></p>
+            </form>
+    </div>
+    <footer>
+        <p>&copy; 2025 Global Hotel Booking. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

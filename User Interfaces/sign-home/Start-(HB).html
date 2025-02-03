@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="./Css/Start.css" />
+</head>
+<title>
+    Get started
+</title>
+
+<body>
+    <div class="Bar">
+        <a href="./WELCOME.html"><img src="./Icon/Back Arrow.png" width="35px"></a>
+    </div>
+    <div class="container">
+        <img src="./Icon/Sign in.ico" width="10%" />
+        <h1>
+            <font color="#004d40">Login To Your Account</font>
+        </h1><br>
+        <form action="" method="POST">
+            <p><input type="email" required="true"
+                    placeholder="User Name                                           @####.com" name="Email"
+                    class="input"></p>
+            <p><input class="input" id="password" name="Pass" type="password" pattern="^\S{6,}$"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : '');"
+                    placeholder="Password" required>
+            <p><input type="submit" class="btn" style="width:40%;
+height:30px;" value="Login" /></p>
+            <a href="" style="margin-left:14%;">
+                <font size="2">Forget Your Password?</font>
+            </a>
+            <a href="SignUp-(HB).html" style="margin:14%;">
+                <font size="2">Create Account</font>
+            </a>
+            <h4>Continue With</h4>
+            <a href="https://accounts.google.com/"><img src="./Icon/Google.ico"
+                    width="5%"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://web.facebook.com/"><img
+                    src="./Icon/Facebook.ico" width="5%"></a>
+            </from>
+    </div>
+    <footer>
+        <p>&copy; 2025 Global Hotel Booking. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
