@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 03, 2025 at 11:26 PM
+-- Generation Time: Feb 04, 2025 at 01:27 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -58,12 +58,16 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `existing_reservations`;
 CREATE TABLE IF NOT EXISTS `existing_reservations` (
-  `ReservationID` int DEFAULT NULL,
+  `ReservationsID` int DEFAULT NULL,
   `UserID` int DEFAULT NULL,
   `ReviewID` int DEFAULT NULL,
   `Status` enum('Completed') DEFAULT NULL,
   `CreatedAt` timestamp NULL DEFAULT NULL,
-  KEY `ReservationID` (`ReservationID`),
+  UNIQUE KEY `UserID_2` (`UserID`,`ReviewID`),
+  UNIQUE KEY `ReviewID_2` (`ReviewID`),
+  UNIQUE KEY `ReservationsID` (`ReservationsID`),
+  UNIQUE KEY `ReviewID_3` (`ReviewID`),
+  KEY `ReservationID` (`ReservationsID`),
   KEY `UserID` (`UserID`),
   KEY `ReviewID` (`ReviewID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -72,8 +76,10 @@ CREATE TABLE IF NOT EXISTS `existing_reservations` (
 -- Dumping data for table `existing_reservations`
 --
 
-INSERT INTO `existing_reservations` (`ReservationID`, `UserID`, `ReviewID`, `Status`, `CreatedAt`) VALUES
-(1, 1, 1, 'Completed', '2025-02-03 23:04:50');
+INSERT INTO `existing_reservations` (`ReservationsID`, `UserID`, `ReviewID`, `Status`, `CreatedAt`) VALUES
+(1, 1, 1, 'Completed', '2025-02-03 23:04:50'),
+(5, 1, 3, 'Completed', '2025-02-04 01:16:59'),
+(100, 1, 2, 'Completed', '2025-02-04 01:16:59');
 
 -- --------------------------------------------------------
 
@@ -89,16 +95,20 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `Feedback` text,
   `FeedbackDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`FeedbackID`),
+  UNIQUE KEY `UserID_2` (`UserID`,`HotelID`),
   KEY `UserID` (`UserID`),
   KEY `HotelID` (`HotelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=801 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `feedback`
 --
 
 INSERT INTO `feedback` (`FeedbackID`, `UserID`, `HotelID`, `Feedback`, `FeedbackDate`) VALUES
-(1, 1, 1, 'Excellent service!', '2025-02-03 16:07:47');
+(1, 1, 1, 'Excellent service!', '2025-02-03 16:07:47'),
+(700, 5, 3, NULL, '2025-02-04 01:18:10'),
+(750, 7, 2, NULL, '2025-02-04 01:19:37'),
+(800, 2, 3, NULL, '2025-02-04 01:19:51');
 
 -- --------------------------------------------------------
 
@@ -137,23 +147,26 @@ INSERT INTO `hotels table` (`HotelID`, `Hotel_name`, `Country`, `City`, `Address
 
 DROP TABLE IF EXISTS `hotel_reviews`;
 CREATE TABLE IF NOT EXISTS `hotel_reviews` (
-  `ReviewID` int NOT NULL AUTO_INCREMENT,
-  `UserID` int DEFAULT NULL,
-  `HotelID` int DEFAULT NULL,
-  `Star_rate` int DEFAULT NULL,
-  `Review` text,
-  `ReviewDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `ReviewID` int NOT NULL,
+  `Star_rate` int NOT NULL,
+  `Review` text NOT NULL,
+  `ReviewDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UserID` int NOT NULL,
+  `HotelID` int NOT NULL,
   PRIMARY KEY (`ReviewID`),
-  KEY `UserID` (`UserID`),
-  KEY `HotelID` (`HotelID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UserID` (`UserID`),
+  UNIQUE KEY `HotelID` (`HotelID`),
+  UNIQUE KEY `UserID_2` (`UserID`,`HotelID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `hotel_reviews`
 --
 
-INSERT INTO `hotel_reviews` (`ReviewID`, `UserID`, `HotelID`, `Star_rate`, `Review`, `ReviewDate`) VALUES
-(1, 1, 1, 5, 'amazing!', '2025-02-03 16:09:26');
+INSERT INTO `hotel_reviews` (`ReviewID`, `Star_rate`, `Review`, `ReviewDate`, `UserID`, `HotelID`) VALUES
+(700, 4, '', '2025-02-04 01:20:15', 1, 3),
+(750, 5, '', '2025-02-04 01:20:34', 6, 2),
+(800, 2, '', '2025-02-04 01:20:51', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -163,24 +176,24 @@ INSERT INTO `hotel_reviews` (`ReviewID`, `UserID`, `HotelID`, `Star_rate`, `Revi
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE IF NOT EXISTS `payment` (
-  `PaymentID` int NOT NULL AUTO_INCREMENT,
-  `ReservationID` int DEFAULT NULL,
-  `Payment_method` enum('Credit Card','Cash') DEFAULT NULL,
-  `Amount` decimal(10,2) DEFAULT NULL,
-  `TransactionID` varchar(255) DEFAULT NULL,
-  `Currency` varchar(10) DEFAULT NULL,
-  `Status` enum('Success','Failed','Pending') DEFAULT NULL,
-  `PaymentDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `PaymentID` int NOT NULL,
+  `ReservationsID` int NOT NULL,
+  `Payment_method` enum('credit card','cash','','') NOT NULL,
+  `Amount` decimal(10,0) NOT NULL,
+  `TransactionID` varchar(255) NOT NULL,
+  `Currency` varchar(10) NOT NULL,
+  `Status` enum('success','failed','pending','') NOT NULL,
+  `PaymentDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`PaymentID`),
-  KEY `ReservationID` (`ReservationID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `ReservationsID` (`ReservationsID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`PaymentID`, `ReservationID`, `Payment_method`, `Amount`, `TransactionID`, `Currency`, `Status`, `PaymentDate`) VALUES
-(1, 1, 'Credit Card', 11970.00, 'TRX123456789', 'INR', 'Success', '2025-02-03 23:03:58');
+INSERT INTO `payment` (`PaymentID`, `ReservationsID`, `Payment_method`, `Amount`, `TransactionID`, `Currency`, `Status`, `PaymentDate`) VALUES
+(700, 100, 'cash', 250, '', 'usd', 'pending', '2025-02-04 01:21:27');
 
 -- --------------------------------------------------------
 
@@ -218,7 +231,7 @@ INSERT INTO `reports` (`ReportID`, `UserID`, `ReportType`, `ReportData`, `Report
 
 DROP TABLE IF EXISTS `reservations table`;
 CREATE TABLE IF NOT EXISTS `reservations table` (
-  `reservationsID` int NOT NULL,
+  `ReservationsID` int NOT NULL,
   `UserID` int NOT NULL,
   `HotelID` int NOT NULL,
   `CheckIn_date` date NOT NULL,
@@ -227,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `reservations table` (
   `Status` enum('confirmed','pending','cancelled','completed') NOT NULL,
   `Special_Request` text NOT NULL,
   `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`reservationsID`),
+  PRIMARY KEY (`ReservationsID`),
   UNIQUE KEY `UserID` (`UserID`),
   UNIQUE KEY `HotelID` (`HotelID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -236,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `reservations table` (
 -- Dumping data for table `reservations table`
 --
 
-INSERT INTO `reservations table` (`reservationsID`, `UserID`, `HotelID`, `CheckIn_date`, `CheckOut_Date`, `Amount`, `Status`, `Special_Request`, `CreatedAt`) VALUES
+INSERT INTO `reservations table` (`ReservationsID`, `UserID`, `HotelID`, `CheckIn_date`, `CheckOut_Date`, `Amount`, `Status`, `Special_Request`, `CreatedAt`) VALUES
 (5, 3, 2, '2025-02-12', '2025-02-14', 70, 'pending', '', '2025-02-02 20:41:09'),
 (100, 1, 1, '0000-00-00', '0000-00-00', 150, 'confirmed', '', '2025-02-02 20:38:07');
 
@@ -249,11 +262,11 @@ INSERT INTO `reservations table` (`reservationsID`, `UserID`, `HotelID`, `CheckI
 DROP TABLE IF EXISTS `reserved_rooms`;
 CREATE TABLE IF NOT EXISTS `reserved_rooms` (
   `Reserved_rooms_ID` int NOT NULL,
-  `ReservationID` int NOT NULL,
+  `ReservationsID` int NOT NULL,
   `RoomID` int NOT NULL,
   `Quantity` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`Reserved_rooms_ID`),
-  UNIQUE KEY `ReservationID` (`ReservationID`),
+  UNIQUE KEY `ReservationID` (`ReservationsID`),
   UNIQUE KEY `RoomID` (`RoomID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -261,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `reserved_rooms` (
 -- Dumping data for table `reserved_rooms`
 --
 
-INSERT INTO `reserved_rooms` (`Reserved_rooms_ID`, `ReservationID`, `RoomID`, `Quantity`) VALUES
+INSERT INTO `reserved_rooms` (`Reserved_rooms_ID`, `ReservationsID`, `RoomID`, `Quantity`) VALUES
 (55, 5, 2, 1),
 (77, 100, 1, 1);
 
@@ -337,11 +350,30 @@ INSERT INTO `users` (`UserID`, `Email`, `Password`, `FName`, `LName`, `BirthDate
 --
 
 --
+-- Constraints for table `existing_reservations`
+--
+ALTER TABLE `existing_reservations`
+  ADD CONSTRAINT `existing_reservations_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
+
+--
+-- Constraints for table `hotel_reviews`
+--
+ALTER TABLE `hotel_reviews`
+  ADD CONSTRAINT `hotel_reviews_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`),
+  ADD CONSTRAINT `hotel_reviews_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`ReservationsID`) REFERENCES `reservations table` (`ReservationsID`);
 
 --
 -- Constraints for table `reports`
@@ -355,6 +387,13 @@ ALTER TABLE `reports`
 ALTER TABLE `reservations table`
   ADD CONSTRAINT `reservations table_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `reservations table_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels table` (`HotelID`);
+
+--
+-- Constraints for table `reserved_rooms`
+--
+ALTER TABLE `reserved_rooms`
+  ADD CONSTRAINT `reserved_rooms_ibfk_1` FOREIGN KEY (`ReservationsID`) REFERENCES `reservations table` (`ReservationsID`),
+  ADD CONSTRAINT `reserved_rooms_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `rooms table` (`RoomID`);
 
 --
 -- Constraints for table `rooms table`
