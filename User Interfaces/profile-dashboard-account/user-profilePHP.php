@@ -1,3 +1,41 @@
+<?php
+session_start();
+
+
+if (!isset($_SESSION['UserID'])) {
+    header("Location: ../sign-home/login.php");
+    exit();
+}
+
+
+include '../db-connect.php'; 
+
+$userID = $_SESSION['UserID'];
+
+
+$sql = "SELECT Email, FName, LName, BirthDate, Phone FROM users WHERE UserID = ?";
+$stmt = $conn->prepare($sql);
+
+if ($stmt) {
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    } else {
+        echo "Error: User not found.";
+        exit();
+    }
+
+    $stmt->close();
+} else {
+    die("Error preparing statement: " . $conn->error);
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,7 +154,7 @@ footer {
 </head>
 <body>
     <header class="header">
-        <a href="../profile-dashboard-account/manage-account.html"><img src="Back Arrow.png" width="35px"></a>
+        <a href="manage-accountPHP.php"><img src="Back Arrow.png" width="35px"></a>
         <h1>Your details</h1>
         <h3>
             <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
@@ -124,9 +162,9 @@ footer {
     </header>
     
     <div class="container">
-        <form class="profile-form">
+        <form class="profile-form" action="update-profile.php" method="post">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" maxlength="50" required>
+            <input type="email" id="email" name="email" maxlength="50" required value="<?php echo htmlspecialchars($user['Email']); ?>">
 
             <label for="current-password">Current Password:</label>
             <input type="password" id="current-password" name="current-password" maxlength="50" required>
@@ -137,17 +175,17 @@ footer {
             <label for="confirm-password">Confirm New Password:</label>
             <input type="password" id="confirm-password" name="confirm-password" maxlength="50">
 
-            <label for="fname">First Name:</label required>
-            <input type="text" id="fname" name="fname" maxlength="50">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" maxlength="50" value="<?php echo htmlspecialchars($user['FName']); ?>">
 
             <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="lname" maxlength="50">
+            <input type="text" id="lname" name="lname" maxlength="50" value="<?php echo htmlspecialchars($user['LName']); ?>">
 
             <label for="birthdate">Birth Date:</label>
-            <input type="date" id="birthdate" name="birthdate">
+            <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($user['BirthDate']); ?>">
 
             <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" maxlength="20">
+            <input type="tel" id="phone" name="phone" maxlength="20" value="<?php echo htmlspecialchars($user['Phone']); ?>">
 
             <button type="submit">Save Details</button>
         </form>

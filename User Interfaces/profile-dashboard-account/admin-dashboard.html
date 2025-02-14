@@ -3,32 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>admin-dashboard</title>
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffbf0; 
+    margin: 0;
+    padding: 0;
+    color: #004d40; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 10px 20px; 
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header .back-arrow {
+    position: absolute;
+    left: 20px;
+}
+
+.header .home-link {
+    position: absolute;
+    right: 20px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 1.5em; 
+}
+
+.container {
+    flex: 1;
+    display: flex;
+}
+
+.sidebar {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 20px;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+}
+
+.sidebar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile-section button {
+    width: 100%;
+    background-color: #ffffff;
+    color: #004d40;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sidebar .profile-section button:hover {
+    background-color: #fffbf0;
+}
+
+.main-content {
+    margin-left: 270px;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-widgets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.chart-container {
+    background-color: #fffbf0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 300px;
+    text-align: center;
+    color: #004d40;
+}
+
+.chart-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 3px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #004d40;
+    color: white;
+    text-align: center;
+    position: relative; 
+    margin-top: auto; 
+    width: 100%;
+}
+    </style>
 </head>
 <body>
+    <header class="header">
+        <h1>Admin Dashboard</h1>
+    </header>
+    
     <div class="container">
         <aside class="sidebar">
-            <header class="header">
-                <div class="logo">
-                    <h1>Hotels Booking</h1>
-                </div>
-            </header>
+            <div class="logo">Hotels Booking</div>
             <div class="profile-section">
-                <button onclick="location.href='admin-dashboard.html'">Profile</button>
-                <button onclick="location.href='admin-dashboard.html'">Reports</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing Users</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing Hotels and APIs</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing Bookings</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing Reviews</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing App Content</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing App Settings</button>
-                <button onclick="location.href='admin-dashboard.html'">Managing Privacy and Policy</button>
-                <button onclick="location.href='admin-dashboard.html'">Log Out</button>
+                <button onclick="location.href='../profile-dashboard-account/admin-profile.html'">Profile</button>
+                <button onclick="location.href='#'">Reports</button>
+                <button onclick="location.href='#'">Managing Users</button>
+                <button onclick="location.href='#'">Managing Hotels and APIs</button>
+                <button onclick="location.href='#'">Managing Bookings</button>
+                <button onclick="location.href='#'">Managing Reviews</button>
+                <button onclick="location.href='#'">Managing App Content</button>
+                <button onclick="location.href='#'">Managing App Settings</button>
+                <button onclick="location.href='#'">Managing Privacy and Policy</button>
+                <button onclick="location.href='../sign-home/WELCOME-(HB).html'">Log Out</button>
             </div>
         </aside>
         <main class="main-content">
-            <h2>Admin Dashboard</h2>
             <div class="dashboard-widgets">
                 <div class="chart-container" id="booking-trends">
                     <h3>Booking Analytics and Trends</h3>
@@ -58,9 +183,9 @@
             </div>
         </main>
     </div>
+    
     <footer class="footer">
-        <p>&copy; 2025 Hotels Booking. All rights reserved. <button onclick="location.href='admin-dashboard.html'">Contact Us</button></p>
+        <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
     </footer>
 </body>
 </html>
-

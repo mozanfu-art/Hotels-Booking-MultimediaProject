@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Account</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>your bookings</title>
     <style>
         /* General Styles */
 body {
@@ -90,6 +89,18 @@ body {
     margin-right: 10px;
 }
 
+.section-bookings {
+    text-align: left;
+    padding: 1em;
+}
+
+.section-bookings h3,
+.section-bookings p {
+    color: black;
+    font-family: Cambria;
+    font-size: 1.5em; 
+}
+
 /* Footer Styles */
 footer {
     background-color: #004d40;
@@ -103,30 +114,29 @@ footer {
 </head>
 <body>
     <div class="header">
-        <a href="../sign-home/Home-(HB).html"><img src="Back Arrow.png" width="35px"></a>
-        <h1>Manage Account</h1>
+        <a href="../profile-dashboard-account/manage-account.html"><img src="Back Arrow.png" width="35px"></a>
+        <h1>Your Bookings</h1>
         <h3>
             <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
         </h3>
     </div>
     <div class="container account-page">
         <div class="account-options">
-            <a href="../profile-dashboard-account/user-profile.html" class="account-button">
-                <i class="fas fa-user-edit"></i> Edit Your Profile
+            <a href="../confirmation-reviews-feedbacks/confirmationPHP.php" class="account-button">
+                <i class="fas fa-user-edit"></i> view your booking details
             </a>
-            <a href="../profile-dashboard-account/your-bookings.html" class="account-button">
-                <i class="fas fa-calendar-check"></i> Your Bookings
-            </a>
-            <a href="../confirmation-reviews-feedbacks/reviews.html" class="account-button">
-                <i class="fas fa-star"></i> Your Staying Reviews
-            </a>
-            <a href="../confirmation-reviews-feedbacks/feedback.html" class="account-button">
-                <i class="fas fa-star"></i> Your App Feedbacks
-            </a>
-            <a href="../booking-payment-settings/settings.html" class="account-button">
-                <i class="fas fa-cog"></i> Manage Settings
+        <div class="section-bookings">
+            <h2>You don't have any reservations yet</h2>
+            <p>please Explore in the home page </br>
+                so you can find the perfect hotel in your destination</br>
+            </p>
+            <div class="account-options">
+            <a href="../sign-home/Home-(HB).html" class="account-button">
+                <i class="fas fa-user-edit"></i> Book Now
             </a>
         </div>
+       </div>
+      </div>
     </div>
     <footer>
         <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
