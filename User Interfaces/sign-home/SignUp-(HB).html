@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="./Css/Sign-Up.css" />
+</head>
+<title>
+    Create Account
+</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #004d40;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        margin: 0;
+    }
+
+    .bar {
+        width: 100%;
+        height: 40px;
+        background-color: #004d40;
+    }
+
+
+    .container {
+        background-color: white;
+        width: 35%;
+        height: auto;
+        margin: auto;
+        text-align: center;
+        padding: 5px 0px;
+        box-shadow: 0px 0px 0px rgb(0, 0, 0, 0.5);
+        border: 0px;
+        border-radius: 40px;
+    }
+
+    .container label {
+        margin-right: 55%;
+    }
+
+    .container:hover {
+        transform: scale(1.05);
+    }
+
+    .txt {
+        width: 40%;
+        height: 40px;
+        color: #004d40;
+    }
+
+    .input {
+        border: 1px solid #004d40;
+        border-radius: 1px;
+        border-width: 1px;
+        padding: 4px;
+        width: 70%;
+        height: 40px;
+        color: #004d40;
+        background-color: #fffbf0;
+    }
+
+    .input:hover {
+        border: 3px solid #004d40;
+    }
+
+    .btn {
+        width: 20%;
+        height: 60px;
+        background: #004d40;
+        color: #fffbf0;
+        border: none;
+    }
+
+    .btn:hover {
+        background: #fffbf0;
+        color: #004d40;
+        border: 1px groove #004d40;
+    }
+
+    ::placeholder {
+        color: #004d40;
+        opacity: 1;
+    }
+
+    footer {
+        background-color: #004d40;
+        color: white;
+        text-align: center;
+        position: relative;
+        margin-top: auto;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="bar">
+        <a href="./Start-(HB).html"><img src="./Icon/Back Arrow.png" width="35px"></a>
+    </div>
+    <div class="container">
+        <img src="./Icon/Sign in.ico" width="15%" />
+        <h1>
+            <font color="#004d40">Create Your Account</font>
+        </h1>
+        <form action="./PHP/signUp-db.php" method="POST">
+            <p><input type="txt" required="true" placeholder="First Name" name="FN" style="width:35%;" class="input">
+                <input type="txt" required="true" placeholder="Last Name" name="LN" style="width:35%;" class="input">
+            </p>
+            <p><input type="email" required="true" name="Email" placeholder="Email" class="input"></p>
+            <p><input class="input" id="password" name="password" type="password" pattern="^\S{6,}$"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.pass.pattern = this.value;"
+                    placeholder="Password" required>
+            <p><input class="input" id="pass" name="pass" type="password" pattern="^\S{6,}$"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                    placeholder="Confirm Password" required>
+            <p><input type="tel" required="true" name="Num" placeholder="Phone Number" class="input"></p>
+            <p><label style="" for="Date of Birth">Birth Date:</label></p>
+            <p><input type="date" required="true" name="DOB" placeholder="Date of birth" class="input"></p>
+            <p><input type="submit" class="btn" style="width:70%;height:40px;" value="Create"></p>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

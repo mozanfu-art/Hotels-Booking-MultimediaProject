@@ -1,0 +1,241 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffbf0; /* Background color */
+    margin: 0;
+    padding: 0;
+    color: #004d40; /* Text color */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.header .back-button {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #004d40;
+    color: #ffffff; /* White font color */
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: left; /* Align text to the left */
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Profile Form Styles */
+.profile-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.profile-form input[type="email"],
+.profile-form input[type="password"],
+.profile-form input[type="text"],
+.profile-form input[type="date"],
+.profile-form input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #004d40;
+}
+
+.profile-form button {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.profile-form button:hover {
+    background-color: #00392e;
+}
+
+/* Admin Dashboard Styles */
+.sidebar {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 20px;
+    width: 200px; /* Reduced width for the sidebar */
+    float: left;
+    height: 100vh;
+}
+
+.sidebar .header .logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.sidebar .profile-section {
+    margin-top: 20px;
+}
+
+.sidebar .profile-section button {
+    display: block;
+    width: 100%;
+    background-color: #ffffff;
+    color: #004d40;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+}
+
+.sidebar .profile-section button:hover {
+    background-color: #fffbf0;
+}
+
+.main-content {
+    margin-left: 220px; /* Adjusted margin to match the new sidebar width */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-widgets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.chart-container {
+    background-color: #fffbf0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 300px;
+    text-align: center;
+    color: #004d40;
+}
+
+.chart-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 3px;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    margin: 0;
+    padding-right: 10px;
+}
+
+.footer a,
+.footer button {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.footer a:hover,
+.footer button:hover {
+    text-decoration: underline;
+}
+
+/* manage-account Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.account-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.account-options {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.account-options .account-button {
+    display: inline-block;
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.account-options .account-button:hover {
+    background-color: #00392e;
+}
+
+.account-options .account-button i {
+    margin-right: 10px;
+}
+
+.footer {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}

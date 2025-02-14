@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="profile.html" class="back-button">Back</a>
+            <h1>Your details</h1>
+        </header>
+        <form class="profile-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" maxlength="50" required>
+
+            <label for="current-password">Current Password:</label>
+            <input type="password" id="current-password" name="current-password" maxlength="50">
+
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password" maxlength="50">
+
+            <label for="confirm-password">Confirm New Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" maxlength="50">
+
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" maxlength="50">
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" maxlength="50">
+
+            <label for="birthdate">Birth Date:</label>
+            <input type="date" id="birthdate" name="birthdate">
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" maxlength="20">
+
+            <button type="submit">Save Details</button>
+        </form>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2025 Hotels Booking. All rights reserved. <button onclick="location.href='profile.html'">Contact Us</button></p>
+    </footer>
+</body>
+</html>
+

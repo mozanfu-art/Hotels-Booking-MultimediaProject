@@ -1,0 +1,128 @@
+<html>
+
+<head>
+</head>
+<title>
+    Get started
+</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #004d40;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        margin: 0;
+    }
+
+    .Bar {
+        width: 100%;
+        height: 40px;
+        background-color: #004d40;
+    }
+
+    .container {
+        background-color: white;
+        width: 35%;
+        height: auto;
+        margin: auto;
+        text-align: center;
+        padding: 5px 0px;
+        box-shadow: 0px 0px 0px rgb(0, 0, 0, 0.5);
+        border: 0px;
+        border-radius: 40px;
+    }
+
+    .container:hover {
+        transform: scale(1.05);
+    }
+
+    .txt {
+        width: 40%;
+        height: 40px;
+        color: #004d40;
+    }
+
+    .input {
+        border: 1px solid #004d40;
+        border-radius: 1px;
+        border-width: 1px;
+        padding: 4px;
+        width: 70%;
+        height: 40px;
+        color: #004d40;
+        background-color: #fffbf0;
+    }
+
+    .input:hover {
+        border: 3px solid #004d40;
+    }
+
+    .btn {
+        width: 20%;
+        height: 60px;
+        background: #004d40;
+        color: #fffbf0;
+        border: none;
+    }
+
+    .btn:hover {
+        background: #fffbf0;
+        color: #004d40;
+        border: 1px groove #004d40;
+    }
+
+    a {
+        text-decoration: none;
+        color: #004d40;
+    }
+
+    ::placeholder {
+        color: #004d40;
+        opacity: 1;
+    }
+
+    footer {
+        background-color: #004d40;
+        color: white;
+        text-align: center;
+        position: relative;
+        margin-top: auto;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="Bar">
+        <a href="./WELCOME.html"><img src="./Icon/Back Arrow.png" width="35px"></a>
+    </div><br><br><br>
+    <div class="container">
+        <img src="./Icon/Sign in.ico" width="15%" />
+        <h1>
+            <font color="#004d40">Login To Your Account</font>
+        </h1>
+        <form action="Login-db.php" method="POST">
+            <p><input type="email" required="true" placeholder="Email" name="Email" class="input"></p>
+            <p><input class="input" id="password" name="Pass" type="password" pattern="^\S{6,}$"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : '');"
+                    placeholder="Password" required>
+            <p><input type="submit" class="btn" style="width:70%;
+height:40px;" value="Log in" /></p>
+            <a href="" style="margin-left:13%;">
+                <font size="3">Forget Your Password?</font>
+            </a>
+            <a href="SignUp-(HB).html" style="margin:13%;">
+                <font size="3">Create Account</font>
+            </a>
+            <br><br>
+            <h3>Continue With</h3>
+            <a href=""><img src="./Icon/Google.ico" width="7%"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                href=""><img src="./Icon/Facebook.ico" width="7%"></a>
+            </from>
+    </div>
+    <footer>
+        <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
