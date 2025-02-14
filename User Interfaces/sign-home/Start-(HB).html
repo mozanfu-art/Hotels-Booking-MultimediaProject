@@ -7,6 +7,7 @@
 </title>
 <style>
     body {
+        font-family: Arial, sans-serif;
         background-color: #004d40;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -101,28 +102,25 @@
             <font color="#004d40">Login To Your Account</font>
         </h1>
         <form action="Login-db.php" method="POST">
-            <p><input type="email" required="true"
-                    placeholder="User Name                                              @####.com" name="Email"
-                    class="input"></p>
+            <p><input type="email" required="true" placeholder="Email" name="Email" class="input"></p>
             <p><input class="input" id="password" name="Pass" type="password" pattern="^\S{6,}$"
                     onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : '');"
                     placeholder="Password" required>
             <p><input type="submit" class="btn" style="width:70%;
 height:40px;" value="Log in" /></p>
-            <a href="" style="margin-left:15%;">
+            <a href="" style="margin-left:13%;">
                 <font size="3">Forget Your Password?</font>
             </a>
-            <a href="SignUp-(HB).html" style="margin:15%;">
+            <a href="SignUp-(HB).html" style="margin:13%;">
                 <font size="3">Create Account</font>
             </a>
             <br><br>
             <h3>Continue With</h3>
-            <a href=""><img src="./Icon/Google.ico"
-                    width="7%"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><img
-                    src="./Icon/Facebook.ico" width="7%"></a>
+            <a href=""><img src="./Icon/Google.ico" width="7%"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                href=""><img src="./Icon/Facebook.ico" width="7%"></a>
             </from>
     </div>
-    <footer class="footer">
+    <footer>
         <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
     </footer>
 </body>
