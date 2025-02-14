@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $_SESSION['UserID'] = $row['UserID'];
         $_SESSION['Role'] = $row['Role'];
-        
+
         // Redirect based on user role
         if ($row['Role'] == 'Admin') {
             header("Location: admin-dashboard.html");

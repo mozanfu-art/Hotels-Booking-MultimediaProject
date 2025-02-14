@@ -8,6 +8,7 @@
 </title>
 <style>
     body {
+        font-family: Arial, sans-serif;
         background-color: #004d40;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -32,6 +33,10 @@
         box-shadow: 0px 0px 0px rgb(0, 0, 0, 0.5);
         border: 0px;
         border-radius: 40px;
+    }
+
+    .container label {
+        margin-right: 55%;
     }
 
     .container:hover {
@@ -91,33 +96,31 @@
 <body>
     <div class="bar">
         <a href="./Start-(HB).html"><img src="./Icon/Back Arrow.png" width="35px"></a>
-
-        <div class="container">
-            <img src="./Icon/Sign in.ico" width="15%" />
-            <h1>
-                <font color="#004d40">Create Your Account</font>
-            </h1>
-            <form action="./PHP/signUp-db.php" method="POST">
-                <p><input type="txt" required="true" placeholder="First Name" name="FN" style="width:35%;"
-                        class="input">
-                    <input type="txt" required="true" placeholder="Last Name" name="LN" style="width:35%;"
-                        class="input">
-                </p>
-                <p><input type="email" required="true" name="Email"
-                        placeholder="User Name                                            @####.com" class="input"></p>
-                <p><input class="input" id="password" name="password" type="password" pattern="^\S{6,}$"
-                        onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.pass.pattern = this.value;"
-                        placeholder="Password" required>
-                <p><input class="input" id="pass" name="pass" type="password" pattern="^\S{6,}$"
-                        onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
-                        placeholder="Confirm Password" required>
-                <p><input type="tel" required="true" name="Num" placeholder="Phone Number" class="input"></p>
-                <p><input type="date" required="true" name="DOB" placeholder="Date of birth" class="input"></p>
-                <p><input type="submit" class="btn" style="width:70%;height:40px;" value="Create"></p>
-            </form>
-        </div>
     </div>
-    <footer class="footer">
+    <div class="container">
+        <img src="./Icon/Sign in.ico" width="15%" />
+        <h1>
+            <font color="#004d40">Create Your Account</font>
+        </h1>
+        <form action="./PHP/signUp-db.php" method="POST">
+            <p><input type="txt" required="true" placeholder="First Name" name="FN" style="width:35%;" class="input">
+                <input type="txt" required="true" placeholder="Last Name" name="LN" style="width:35%;" class="input">
+            </p>
+            <p><input type="email" required="true" name="Email" placeholder="Email" class="input"></p>
+            <p><input class="input" id="password" name="password" type="password" pattern="^\S{6,}$"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.pass.pattern = this.value;"
+                    placeholder="Password" required>
+            <p><input class="input" id="pass" name="pass" type="password" pattern="^\S{6,}$"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                    placeholder="Confirm Password" required>
+            <p><input type="tel" required="true" name="Num" placeholder="Phone Number" class="input"></p>
+            <p><label style="" for="Date of Birth">Birth Date:</label></p>
+            <p><input type="date" required="true" name="DOB" placeholder="Date of birth" class="input"></p>
+            <p><input type="submit" class="btn" style="width:70%;height:40px;" value="Create"></p>
+        </form>
+    </div>
+
+    <footer>
         <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
     </footer>
 </body>

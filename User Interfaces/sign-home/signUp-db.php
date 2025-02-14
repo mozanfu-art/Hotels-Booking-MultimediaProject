@@ -34,7 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-function createResponsePage($mess, $subMess, $btn, $PLink) {
+function createResponsePage($mess, $subMess, $btn, $PLink)
+{
     return "
     <html>
     <style>
