@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+         
+        /* General Styles */
+        body {
+          background-color: #fffbf0; 
+          color: #004d40; 
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          padding: 0;
+          flex-direction: column;
+          min-height: 100vh;
+      }
+      
+      /* Header Styles */
+      .header {
+        background-color: #004d40;
+        color: #ffffff;
+        padding: 10px 20px; 
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .header .back-arrow {
+        position: absolute;
+        left: 20px;
+    }
+
+    .header .home-link {
+        position: absolute;
+        right: 20px; 
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .header h1 {
+        flex-grow: 1;
+        text-align: center;
+        margin: 0;
+        font-size: 1.5em; 
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin: 10px;
+      
+  }
+
+      select, input, button {
+          margin: 8px 0;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+      }
+
+      button {
+          background-color: #004d40;
+          color: white;
+          border: none;
+          cursor: pointer;
+      }
+
+      .links {
+          margin-top: 15px;
+      }
+
+      .links a {
+          display: inline-block;
+          margin: 5px;
+          color: #004d40;
+          text-decoration: none;
+          font-weight: bold;
+      }
+
+      #cardDetails {
+          display: none;
+          margin-top: 10px;
+      }
+
+      .payment-methods {
+        background-color: #ffffff;
+        width: 50%;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: left; 
+        display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+      }
+
+      .payment-methods label {
+          margin-right: 15px;
+          font-weight: bold;
+      } 
+
+      .booker-info {
+        background-color: #ffffff;
+        width: 50%;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: left; 
+        display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+        text-align: left; 
+      }
+
+      .booker-info label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+      }
+
+      .booker-info input {
+          padding: 10px;
+          margin-bottom: 15px;
+      }
+
+      /* Footer Styles */
+      footer {
+          background-color: #004d40;
+          color: white;
+          text-align: center;
+          position: relative; 
+          margin-top: auto; 
+          width: 100%;
+      }
+    </style>
+    <script>
+        function formatMMYY(input) {
+            let value = input.value.replace(/[^0-9]/g, '');
+            if (value.length > 2) {
+                input.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            } else {
+                input.value = value;
+            }
+        }
+        function toggleCardDetails() {
+            var paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+            var cardDetails = document.getElementById("cardDetails");
+            cardDetails.style.display = paymentType === "card" ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+  <div class="header">
+    <a href="./BookingPHP.php"><img src="Back Arrow.png" width="35px"></a>
+    <h1>Fill Your Information</h1>
+    <h3>
+        <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
+    </h3>
+</div>
+    <div class="container">
+        <div class="booker-info">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" placeholder="Enter your first name" required>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" placeholder="Enter your last name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+        <p>Total Bill: <span>$XXX</span></p>
+        <div class="payment-methods">
+            <label>
+                <input type="radio" name="paymentType" value="cash" onchange="toggleCardDetails()"> Cash
+            </label>
+            <label>
+                <input type="radio" name="paymentType" value="card" onchange="toggleCardDetails()"> Card
+            </label>
+        </div>
+        <div id="cardDetails" style="display: none;">
+            <input type="text" placeholder="Card Number" required>
+        </div>
+        <button type="submit">Book Now
+          <a href="../confirmation-reviews-feedbacks/confirmationPHP.php"></a>
+        </button>
+        <div class="links">
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
+  </footer>
+</html>
