@@ -154,15 +154,15 @@ footer {
 </head>
 <body>
     <header class="header">
-        <a href="manage-account.html"><img src="Back Arrow.png" width="35px"></a>
+        <a href="../profile-dashboard-account/admin-dashboard.html"><img src="Back Arrow.png" width="35px"></a>
         <h1>Your details</h1>
         <h3>
-            <a href="Home-(HB).html" class="home-link">Home</a>
+            <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
         </h3>
     </header>
     
     <div class="container">
-        <form class="profile-form" action="update-profile.php" method="post">
+        <form class="profile-form" action="../profile-dashboard-account/update-profile.php" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" maxlength="50" required value="<?php echo htmlspecialchars($user['Email']); ?>">
 
