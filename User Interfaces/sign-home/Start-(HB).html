@@ -101,7 +101,7 @@
         <h1>
             <font color="#004d40">Login To Your Account</font>
         </h1>
-        <form action="Login-db.php" method="POST">
+        <form action="./Login-db.php" method="POST">
             <p><input type="email" required="true" placeholder="Email" name="Email" class="input"></p>
             <p><input class="input" id="password" name="Pass" type="password" pattern="^\S{6,}$"
                     onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : '');"
@@ -111,7 +111,7 @@ height:40px;" value="Log in" /></p>
             <a href="" style="margin-left:13%;">
                 <font size="3">Forget Your Password?</font>
             </a>
-            <a href="SignUp-(HB).html" style="margin:13%;">
+            <a href="./SignUp-(HB).html" style="margin:13%;">
                 <font size="3">Create Account</font>
             </a>
             <br><br>
@@ -124,5 +124,4 @@ height:40px;" value="Log in" /></p>
         <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
     </footer>
 </body>
-
 </html>

@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['Email'];
     $password = $_POST['Pass'];
 
-    // Query to check user credentials
     $sql = "SELECT * FROM users WHERE Email = '$email' AND Password = '$password'";
     $result = $conn->query($sql);
 
@@ -18,12 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect based on user role
         if ($row['Role'] == 'Admin') {
-            header("Location: admin-dashboard.html");
+            header("Location: ../profile-dashboard-account/admin-dashboardPHP.php");
         } else {
-            header("Location: home-(HB).html");
+            header("Location: Home-(HB).html");
         }
     } else {
-        // Invalid credentials
+
         echo "Invalid email or password";
     }
 }
