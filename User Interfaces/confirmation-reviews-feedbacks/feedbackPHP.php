@@ -1,11 +1,41 @@
+<?php
+include '../db-connect.php';
+session_start();
+
+
+if (!isset($_SESSION['UserID'])) {
+    header("Location: ../sign-home/login.php");
+    exit();
+}
+
+$userID = $_SESSION['UserID']; 
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $UserID) {
+    $feedback_type = $_POST['AppRate'];
+    $feedback_text = $_POST['feedback'];
+
+    $stmt = $conn->prepare("INSERT INTO feedback (UserID, AppRate, feedback, FeedbackDate) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("iss", $user_id, $feedback_type, $feedback_text);
+    $stmt->execute();
+    $stmt->close();
+
+    header("Location: ./feedbackPHP.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Feedback</title>
-<style>
+    <style>
     /* General Styles */
 body {
     font-family: Arial, sans-serif;
@@ -133,27 +163,27 @@ footer {
 </style>
 </head>
 <body>
-<div class="header">
-<a href="../profile-dashboard-account/manage-account.html"><img src="Back Arrow.png" width="35px"></a>
-<h1>Give App Feedback</h1>
-<h3>
-    <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
-</h3>
-</div>
-<div class="section-reviews">
-<h3>How do you rate our app?</h3>
-<h3>Can you tell us a little more?</h3>
-<form onsubmit="event.preventDefault(); displayThankYouMessage();">
-    <label for="fname">Select feedback type</label>
-    <select name="feedback_type" id="feedback_type">
-        <option value="very-bad">Very Bad</option>
-        <option value="bad">Bad</option>
-        <option value="good">Good</option>
-        <option value="very-good">Very Good</option>
-        <option value="excellent">Excellent</option>
-    </select><br>
-    <textarea name="feedback_text" id="feedback_text" placeholder="Enter your feedback here"></textarea><br>
-    <input type="submit" value="Send feedback" class="reviews-policy-button">
+    <div class="header">
+        <a href="../profile-dashboard-account/manage-accountPHP.php"><img src="Back Arrow.png" width="35px"></a>
+        <h1>Give App Feedback</h1>
+        <h3>
+            <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
+        </h3>
+    </div>
+    <div class="section-reviews">
+        <h3>How do you rate our app?</h3>
+        <h3>Can you tell us a little more?</h3>
+        <form method="POST" action="../sign-home/Home-(HB).html">
+            <label for="AppRate">Select feedback type</label>
+            <select name="AppRate" required>
+                <option value="very-bad">Very Bad</option>
+                <option value="bad">Bad</option>
+                <option value="good">Good</option>
+                <option value="very-good">Very Good</option>
+                <option value="excellent">Excellent</option>
+            </select>
+            <textarea name="feedback_text" id="feedback_text" placeholder="Enter your feedback here"></textarea><br>
+    <input type="submit" value="Send feedback" required class="reviews-policy-button">
 </form>
 <div id="thank-you-message" class="feedback-message" style="display: none;">
     "Thank you, we will use your feedback to improve our app."
