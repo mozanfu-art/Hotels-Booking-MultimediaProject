@@ -222,7 +222,7 @@ body {
                     Save Settings
                 </button>
                 </form>
-            <a href="../profile-dashboard-account/manage-accountPHP.php" class="settings-button">
+            <a href="../profile-dashboard-account/manage-account.html" class="settings-button">
                 <i class="fas fa-user-edit"></i> Manage Account
             </a>
             <a href="#" class="settings-button">
