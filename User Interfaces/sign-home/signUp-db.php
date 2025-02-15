@@ -15,16 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $checkEmailStmt->store_result();
 
     if ($checkEmailStmt->num_rows > 0) {
-        echo createResponsePage("Your Account already exists", "Go to Login", "LOGIN", "http://localhost/Hotels-Booking/Start-(HB).html");
+        echo createResponsePage("Your Account already exists", "Go to Login", "LOGIN", "Start-(HB).html");
     } else {
 
         $stmt = $conn->prepare("INSERT INTO users (Email, Password, FName, LName, BirthDate, Phone) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $email, $pass, $First_NM, $Last_NM, $date, $num);
 
         if ($stmt->execute()) {
-            echo createResponsePage("Account created successfully", "Login Now", "LOGIN", "http://localhost/Hotels-Booking/Start-(HB).html");
+            echo createResponsePage("Account created successfully", "Login Now", "LOGIN", "Start-(HB).html");
         } else {
-            echo createResponsePage("Something went wrong", "Try again", "SignUp", "/Hotels-Booking/SignUp-(HB).html");
+            echo createResponsePage("Something went wrong", "Try again", "SignUp", "SignUp-(HB).html");
         }
 
         $stmt->close();
