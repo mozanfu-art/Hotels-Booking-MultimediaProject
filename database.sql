@@ -1,124 +1,59 @@
-CREATE DATABASE  IF NOT EXISTS `global_hotels_booking` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `global_hotels_booking`;
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: global_hotels_booking
--- ------------------------------------------------------
--- Server version	8.0.41
+-- Host: 127.0.0.1:3306
+-- Generation Time: Feb 15, 2025 at 08:53 PM
+-- Server version: 9.1.0
+-- PHP Version: 8.3.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `existing_reservations`
+-- Database: `global_hotels_booking`
 --
 
-DROP TABLE IF EXISTS `existing_reservations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `existing_reservations` (
-  `ReservationID` int NOT NULL,
-  `UserID` int NOT NULL,
-  `ReviewID` int NOT NULL,
-  `Status` enum('confirmed','pending','cancelled','completed') NOT NULL,
-  `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ReservationID`),
-  KEY `UserID` (`UserID`),
-  KEY `ReviewID` (`ReviewID`),
-  CONSTRAINT `existing_reservations_ibfk_1` FOREIGN KEY (`ReservationID`) REFERENCES `reservations` (`ReservationID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `existing_reservations_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
-  CONSTRAINT `existing_reservations_ibfk_3` FOREIGN KEY (`ReviewID`) REFERENCES `hotel_reviews` (`ReviewID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `existing_reservations`
---
-
-LOCK TABLES `existing_reservations` WRITE;
-/*!40000 ALTER TABLE `existing_reservations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `existing_reservations` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `feedback`
 --
 
 DROP TABLE IF EXISTS `feedback`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `feedback` (
+CREATE TABLE IF NOT EXISTS `feedback` (
   `RateID` int NOT NULL AUTO_INCREMENT,
   `UserID` int DEFAULT NULL,
-  `Feedback` text,
+  `Feedback` text COLLATE utf8mb4_general_ci,
   `FeedbackDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `AppRate` int DEFAULT NULL,
   PRIMARY KEY (`RateID`),
   UNIQUE KEY `UserID_2` (`UserID`),
-  KEY `UserID` (`UserID`),
-  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
-  CONSTRAINT `feedback_chk_1` CHECK ((`AppRate` between 1 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=801 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `UserID` (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `feedback`
 --
 
-LOCK TABLES `feedback` WRITE;
-/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,3,'Great experience!','2025-02-03 16:07:47',5);
-/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `feedback` (`RateID`, `UserID`, `Feedback`, `FeedbackDate`, `AppRate`) VALUES
+(1, 3, 'Great experience!', '2025-02-03 16:07:47', 5);
 
---
--- Table structure for table `hotel_reviews`
---
-
-DROP TABLE IF EXISTS `hotel_reviews`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hotel_reviews` (
-  `ReviewID` int NOT NULL AUTO_INCREMENT,
-  `UserID` int DEFAULT NULL,
-  `HotelID` int DEFAULT NULL,
-  `Star_rate` int DEFAULT NULL,
-  `Review` text,
-  `ReviewDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ReviewID`),
-  KEY `UserID` (`UserID`),
-  KEY `HotelID` (`HotelID`),
-  CONSTRAINT `hotel_reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
-  CONSTRAINT `hotel_reviews_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels` (`HotelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hotel_reviews`
---
-
-LOCK TABLES `hotel_reviews` WRITE;
-/*!40000 ALTER TABLE `hotel_reviews` DISABLE KEYS */;
-INSERT INTO `hotel_reviews` VALUES (1,3,2,5,'Exceptional service!','2025-02-03 16:09:26');
-/*!40000 ALTER TABLE `hotel_reviews` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `hotels`
 --
 
 DROP TABLE IF EXISTS `hotels`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hotels` (
+CREATE TABLE IF NOT EXISTS `hotels` (
   `HotelID` int NOT NULL,
   `Hotel_name` varchar(50) NOT NULL,
   `Country` varchar(50) NOT NULL,
@@ -126,223 +61,297 @@ CREATE TABLE `hotels` (
   `Address` text NOT NULL,
   `Star_rate` int NOT NULL,
   `Description` text NOT NULL,
-  `Amenities` json NOT NULL,
+  `Amenities` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ImageURLs` text NOT NULL,
   PRIMARY KEY (`HotelID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ;
 
 --
 -- Dumping data for table `hotels`
 --
 
-LOCK TABLES `hotels` WRITE;
-/*!40000 ALTER TABLE `hotels` DISABLE KEYS */;
-INSERT INTO `hotels` VALUES (1,'Sunrise Hotel','Sudan','Khartoum','123 Nile Street',5,'A luxurious hotel with a stunning view of the Nile.','{\"Gym\": true, \"Pool\": true, \"WiFi\": true}','url1'),(2,'Desert Oasis','Egypt','Cairo','456 Pyramid Road',4,'A charming hotel near the Pyramids.','{\"Spa\": true, \"Pool\": true, \"WiFi\": true}','url2'),(3,'Mountain Retreat','Ethiopia','Addis Ababa','789 Mountain Road',3,'A cozy retreat in the mountains.','{\"Gym\": true, \"WiFi\": true}','url3');
-/*!40000 ALTER TABLE `hotels` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `hotels` (`HotelID`, `Hotel_name`, `Country`, `City`, `Address`, `Star_rate`, `Description`, `Amenities`, `ImageURLs`) VALUES
+(1, 'Sunrise Hotel', 'Sudan', 'Khartoum', '123 Nile Street', 5, 'A luxurious hotel with a stunning view of the Nile.', '{\"Gym\": true, \"Pool\": true, \"WiFi\": true}', 'sunrise_hotel.jpg'),
+(2, 'Desert Oasis', 'Egypt', 'Cairo', '456 Pyramid Road', 4, 'A charming hotel near the Pyramids.', '{\"Spa\": true, \"Pool\": true, \"WiFi\": true}', 'desert_oasis.jpg'),
+(3, 'Mountain Retreat', 'Ethiopia', 'Addis Ababa', '789 Mountain Road', 3, 'A cozy retreat in the mountains.', '{\"Gym\": true, \"WiFi\": true}', 'mountain_retreat.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotel_reviews`
+--
+
+DROP TABLE IF EXISTS `hotel_reviews`;
+CREATE TABLE IF NOT EXISTS `hotel_reviews` (
+  `created_at` date DEFAULT NULL,
+  `full_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `review_text` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `ReviewID` int NOT NULL AUTO_INCREMENT,
+  `UserID` int DEFAULT NULL,
+  `HotelID` int DEFAULT NULL,
+  `Star_rate` int DEFAULT NULL,
+  `Review` text COLLATE utf8mb4_general_ci,
+  `ReviewDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ReviewID`),
+  KEY `UserID` (`UserID`),
+  KEY `HotelID` (`HotelID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hotel_reviews`
+--
+
+INSERT INTO `hotel_reviews` (`created_at`, `full_name`, `user_email`, `review_text`, `ReviewID`, `UserID`, `HotelID`, `Star_rate`, `Review`, `ReviewDate`) VALUES
+(NULL, 'ali', 'aliew123@gmail.com', 'sdlkfnsdv sdjfsl;dff sdlkfsdmf', 2, NULL, NULL, 3, NULL, '2025-02-14 15:26:00'),
+('2025-02-14', 'asdas', 'asfva@fsedsdf.com', 'fosdjkflsdf', 3, NULL, NULL, 4, NULL, '2025-02-14 15:28:40'),
+('2025-02-14', 'ahmed', 'asfva@fseddsfsdfsdf.com', 'fewgbnrsfdsgsdg', 4, NULL, NULL, 5, NULL, '2025-02-14 15:35:54'),
+('2025-02-15', 'mozan ahmed', 'mozan@gmail.com', 'nice staying.', 5, 15, NULL, 1, NULL, '2025-02-15 19:51:51');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `payment`
 --
 
 DROP TABLE IF EXISTS `payment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `payment` (
+CREATE TABLE IF NOT EXISTS `payment` (
   `PaymentID` int NOT NULL,
   `ReservationID` int DEFAULT NULL,
-  `Payment_method` enum('credit card','cash','','') NOT NULL,
+  `Payment_method` enum('credit card','cash','','') COLLATE utf8mb4_general_ci NOT NULL,
   `Amount` decimal(10,0) NOT NULL,
-  `TransactionID` varchar(255) NOT NULL,
-  `Currency` varchar(10) NOT NULL,
-  `Status` enum('success','failed','pending','') NOT NULL,
+  `TransactionID` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Currency` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `Status` enum('success','failed','pending','') COLLATE utf8mb4_general_ci NOT NULL,
   `PaymentDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`PaymentID`),
   UNIQUE KEY `ReservationsID` (`ReservationID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment`
 --
 
-LOCK TABLES `payment` WRITE;
-/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,5,'credit card',70,'45','USD','success','2025-02-02 20:41:09'),(2,100,'credit card',150,'46','USD','success','2025-02-02 20:38:07');
-/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `payment` (`PaymentID`, `ReservationID`, `Payment_method`, `Amount`, `TransactionID`, `Currency`, `Status`, `PaymentDate`) VALUES
+(1, 5, 'credit card', 70, '45', 'USD', 'success', '2025-02-02 20:41:09'),
+(2, 100, 'credit card', 150, '46', 'USD', 'success', '2025-02-02 20:38:07');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `reports`
 --
 
 DROP TABLE IF EXISTS `reports`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reports` (
+CREATE TABLE IF NOT EXISTS `reports` (
   `ReportID` int NOT NULL AUTO_INCREMENT,
   `UserID` int DEFAULT NULL,
-  `ReportType` enum('Bookings','Revenues','Users','Hotels','Feedbacks') NOT NULL,
+  `ReportType` enum('Bookings','Revenues','Users','Hotels','Feedbacks') COLLATE utf8mb4_general_ci NOT NULL,
   `ReportData` blob NOT NULL,
   `ReportDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ReportID`),
-  KEY `UserID` (`UserID`),
-  CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `UserID` (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reports`
 --
 
-LOCK TABLES `reports` WRITE;
-/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
-INSERT INTO `reports` VALUES (1,6,'Bookings',_binary 'Booking data excel file','2025-02-02 14:11:29'),(2,6,'Revenues',_binary 'Revenues data PDF file','2025-02-02 14:11:29');
-/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `reports` (`ReportID`, `UserID`, `ReportType`, `ReportData`, `ReportDate`) VALUES
+(1, 6, 'Bookings', 0x426f6f6b696e67206461746120657863656c2066696c65, '2025-02-02 14:11:29'),
+(2, 6, 'Revenues', 0x526576656e7565732064617461205044462066696c65, '2025-02-02 14:11:29');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `reservations`
 --
 
 DROP TABLE IF EXISTS `reservations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations` (
-  `ReservationID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `reservations` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `UserID` int NOT NULL,
-  `HotelID` int NOT NULL,
+  `RoomID` int NOT NULL,
   `CheckIn_date` date NOT NULL,
   `CheckOut_Date` date NOT NULL,
   `Amount` decimal(10,0) NOT NULL,
-  `Status` enum('confirmed','pending','cancelled','completed') NOT NULL,
-  `Special_Request` text NOT NULL,
+  `Status` enum('confirmed','pending','cancelled','completed') COLLATE utf8mb4_general_ci NOT NULL,
+  `Special_Request` text COLLATE utf8mb4_general_ci NOT NULL,
   `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `PaymentID` int DEFAULT NULL,
-  PRIMARY KEY (`ReservationID`),
-  UNIQUE KEY `UserID` (`UserID`),
-  UNIQUE KEY `HotelID` (`HotelID`),
+  `Rooms` int NOT NULL DEFAULT '1',
+  `Adults` int NOT NULL DEFAULT '1',
+  `Children` int DEFAULT '0',
+  `RoomTypes` set('Single','Double','Suite') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Single',
+  `payment_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `card_number` int NOT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `PaymentID` (`PaymentID`),
-  CONSTRAINT `FK_reservations_hotels` FOREIGN KEY (`HotelID`) REFERENCES `hotels` (`HotelID`),
-  CONSTRAINT `FK_reservations_payment` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`),
-  CONSTRAINT `FK_reservations_user` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `FK_reservations_hotels` (`RoomID`),
+  KEY `FK_reservations_user` (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reservations`
 --
 
-LOCK TABLES `reservations` WRITE;
-/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (5,3,2,'2025-02-12','2025-02-14',70,'completed','','2025-02-02 20:41:09',NULL),(100,1,1,'0000-00-00','0000-00-00',150,'confirmed','','2025-02-02 20:38:07',NULL);
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `reservations` (`id`, `UserID`, `RoomID`, `CheckIn_date`, `CheckOut_Date`, `Amount`, `Status`, `Special_Request`, `CreatedAt`, `PaymentID`, `Rooms`, `Adults`, `Children`, `RoomTypes`, `payment_type`, `card_number`) VALUES
+(5, 5, 2, '2025-02-12', '2025-02-14', 70, 'completed', '', '2025-02-02 20:41:09', NULL, 1, 1, 0, 'Single', '', 0),
+(100, 1, 1, '0000-00-00', '0000-00-00', 150, 'confirmed', '', '2025-02-02 20:38:07', NULL, 1, 1, 0, 'Single', '', 0),
+(123, 13, 1, '0000-00-00', '0000-00-00', 900, 'confirmed', '', '2025-02-15 08:12:34', NULL, 3, 2, 2, 'Suite', 'cash', 0),
+(124, 13, 1, '0000-00-00', '0000-00-00', 300, 'confirmed', '', '2025-02-15 08:17:40', NULL, 1, 1, 0, 'Suite', 'cash', 0),
+(125, 13, 1, '0000-00-00', '0000-00-00', 600, 'confirmed', '', '2025-02-15 08:30:49', NULL, 2, 1, 0, 'Suite', 'cash', 0),
+(126, 13, 2, '0000-00-00', '0000-00-00', 150, 'confirmed', '', '2025-02-15 08:35:12', NULL, 1, 1, 0, 'Double', 'cash', 0),
+(127, 15, 2, '0000-00-00', '0000-00-00', 150, 'confirmed', '', '2025-02-15 19:23:55', NULL, 1, 1, 0, 'Double', 'cash', 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `reserved_rooms`
 --
 
 DROP TABLE IF EXISTS `reserved_rooms`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reserved_rooms` (
+CREATE TABLE IF NOT EXISTS `reserved_rooms` (
   `Reserved_rooms_ID` int NOT NULL,
   `ReservationID` int NOT NULL,
   `RoomID` int NOT NULL,
   `Quantity` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`Reserved_rooms_ID`),
   UNIQUE KEY `ReservationID` (`ReservationID`),
-  UNIQUE KEY `RoomID` (`RoomID`),
-  CONSTRAINT `FK_reserved_rooms_reservation` FOREIGN KEY (`ReservationID`) REFERENCES `reservations` (`ReservationID`),
-  CONSTRAINT `FK_reserved_rooms_room` FOREIGN KEY (`RoomID`) REFERENCES `rooms` (`RoomID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  UNIQUE KEY `RoomID` (`RoomID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reserved_rooms`
 --
 
-LOCK TABLES `reserved_rooms` WRITE;
-/*!40000 ALTER TABLE `reserved_rooms` DISABLE KEYS */;
-INSERT INTO `reserved_rooms` VALUES (55,5,2,1),(77,100,1,1);
-/*!40000 ALTER TABLE `reserved_rooms` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `reserved_rooms` (`Reserved_rooms_ID`, `ReservationID`, `RoomID`, `Quantity`) VALUES
+(55, 5, 2, 1),
+(77, 100, 1, 1);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `rooms`
 --
 
 DROP TABLE IF EXISTS `rooms`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `rooms` (
+CREATE TABLE IF NOT EXISTS `rooms` (
   `RoomID` int NOT NULL,
   `HotelID` int NOT NULL,
+  `max_guests` int NOT NULL,
+  `max_rooms` int NOT NULL,
   `Room_type` enum('Single','Double','Suite') NOT NULL,
   `Occupancy_adults` int NOT NULL,
   `Occupancy_children` int NOT NULL,
   `Price_per_night` decimal(10,2) NOT NULL,
   `Availability` tinyint(1) NOT NULL,
-  `Amenities` json NOT NULL,
+  `Amenities` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Bed_type` enum('King','Queen','Twin') NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `Description` varchar(150) NOT NULL,
   PRIMARY KEY (`RoomID`),
-  KEY `Foreign Key` (`HotelID`),
-  CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotels` (`HotelID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `Foreign Key` (`HotelID`)
+) ;
 
 --
 -- Dumping data for table `rooms`
 --
 
-LOCK TABLES `rooms` WRITE;
-/*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-INSERT INTO `rooms` VALUES (1,1,'Suite',2,2,300.00,1,'{\"Mini Bar\": true, \"Air Conditioning\": true}','King'),(2,1,'Double',2,0,150.00,1,'{\"Mini Bar\": false, \"Air Conditioning\": true}','Queen'),(3,2,'Single',1,0,80.00,1,'{\"Mini Bar\": false, \"Air Conditioning\": true}','Twin'),(4,2,'Double',2,0,120.00,1,'{\"Mini Bar\": true, \"Air Conditioning\": true}','Queen'),(5,3,'Suite',2,1,200.00,1,'{\"Mini Bar\": true, \"Air Conditioning\": true}','King');
-/*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `rooms` (`RoomID`, `HotelID`, `max_guests`, `max_rooms`, `Room_type`, `Occupancy_adults`, `Occupancy_children`, `Price_per_night`, `Availability`, `Amenities`, `Bed_type`, `image`, `Description`) VALUES
+(1, 1, 2, 3, 'Suite', 2, 2, 300.00, 1, '{\"Mini Bar\": true, \"Air Conditioning\": true}', 'King', 'Suite Room.jpg', 'A luxurious suite with a king Sized bed and sofa.'),
+(2, 1, 3, 2, 'Double', 2, 0, 150.00, 1, '{\"Mini Bar\": true, \"Air Conditioning\": true}', 'Queen', 'Double Room.jpg', 'A spacious room with a Queen Sized bed for two people.'),
+(3, 2, 4, 4, 'Single', 1, 0, 80.00, 1, '{\"Mini Bar\": false, \"Air Conditioning\": true}', 'Twin', 'Single Room.jpg', 'A cozy room for one person with a Twin Sized bed.');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `UserID` int NOT NULL AUTO_INCREMENT,
-  `Email` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL,
-  `FName` varchar(50) NOT NULL,
-  `LName` varchar(50) DEFAULT NULL,
+  `Email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `FName` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `LName` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `BirthDate` date DEFAULT NULL,
-  `Phone` varchar(20) DEFAULT NULL,
-  `Role` enum('Traveler','Admin') NOT NULL,
-  `SupportContact_message` text,
-  `SupportContact_preference` enum('Phone','Email','Chatbot') DEFAULT NULL,
+  `Phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `card_number` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Role` enum('Traveler','Admin') COLLATE utf8mb4_general_ci NOT NULL,
+  `SupportContact_message` text COLLATE utf8mb4_general_ci,
+  `SupportContact_preference` enum('Phone','Email','Chatbot') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `theme` varchar(10) COLLATE utf8mb4_general_ci DEFAULT 'light',
+  `currency` varchar(5) COLLATE utf8mb4_general_ci DEFAULT 'usd',
+  `lang` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
+  `email_notifications` tinyint(1) DEFAULT '1',
+  `sms_notifications` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'alice.brown@gmail.com','SecurePass1!','Alice','Brown','1987-06-30','+1-555-8765','Traveler','Chatbot',''),(2,'bob.white@yahoo.com','SecurePass2$','Bob','White','1975-04-10','+44-555-3456','Traveler','Need help with payment','Email'),(3,'carol.johnson@mail.com','SecurePass3#','Carol','Johnson','1992-09-12','+61-555-6543','Traveler',NULL,NULL),(4,'dave.williams@gmail.com','SecurePass4%','Dave','Williams','1983-11-14','+33-555-7890','Traveler',NULL,NULL),(5,'eve.miller@hotmail.com','SecurePass5^','Eve','Miller','1995-07-19','+91-555-4321','Traveler',NULL,NULL),(6,'john.doe@hotelbooking.com','AdminPass1*','John','Doe','1980-05-15','+1-555-2345','Admin','Chatbot','Chatbot'),(7,'jane.smith@hotelbooking.com','AdminPass2&','Jane','Smith','1982-08-25','+44-555-6789','Admin','Reply: Need help with payment','Email');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `users` (`UserID`, `Email`, `Password`, `FName`, `LName`, `BirthDate`, `Phone`, `card_number`, `Role`, `SupportContact_message`, `SupportContact_preference`, `theme`, `currency`, `lang`, `email_notifications`, `sms_notifications`) VALUES
+(1, 'alice.brown@gmail.com', 'SecurePass1!', 'Alice', 'Brown', '1987-06-30', '+1-555-8765', '', 'Traveler', '', 'Chatbot', 'light', 'usd', '', 1, 1),
+(2, 'bob.white@yahoo.com', 'SecurePass2$', 'Bob', 'White', '1975-04-10', '+44-555-3456', '', 'Traveler', 'Need help with payment', 'Email', 'light', 'usd', '', 1, 1),
+(3, 'carol.johnson@mail.com', 'SecurePass3#', 'Carol', 'Johnson', '1992-09-12', '+61-555-6543', '', 'Traveler', NULL, NULL, 'light', 'usd', '', 1, 1),
+(4, 'dave.williams@gmail.com', 'SecurePass4%', 'Dave', 'Williams', '1983-11-14', '+33-555-7890', '', 'Traveler', NULL, NULL, 'light', 'usd', '', 1, 1),
+(5, 'eve.miller@hotmail.com', 'SecurePass5^', 'Eve', 'Miller', '1995-07-19', '+91-555-4321', '', 'Traveler', NULL, NULL, 'light', 'usd', '', 1, 1),
+(6, 'john.doe@hotelbooking.com', 'AdminPass1*', 'John', 'Doe', '1980-05-15', '+1-555-2345', '', 'Admin', 'Chatbot', 'Chatbot', 'light', 'usd', '', 1, 1),
+(7, 'jane.smith@hotelbooking.com', 'AdminPass2&', 'Jane', 'Smith', '1982-08-25', '+44-555-6789', '', 'Admin', 'Reply: Need help with payment', 'Email', 'light', 'usd', '', 1, 1),
+(13, 'dsfwefew@gdmskgsd.com', '12e45316', 'fdssdf', 'sdfsdfsd', '2007-05-09', 'ge54f423', NULL, 'Traveler', NULL, NULL, 'dark', 'usd', 'ar', 0, 1),
+(14, 'ljaklkaklfsd@gmail.com', '1234567', 'ahmed', 'zahir', '1111-11-11', '123456789', NULL, 'Traveler', NULL, NULL, 'light', 'usd', '', 1, 1),
+(15, 'mozan@gmail.com', '12345mozan', 'mozan', 'ahmed', '2025-02-15', '0123456789', NULL, 'Traveler', NULL, NULL, 'light', 'usd', 'ar', 1, 1);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
+-- Constraints for table `hotel_reviews`
+--
+ALTER TABLE `hotel_reviews`
+  ADD CONSTRAINT `hotel_reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `hotel_reviews_ibfk_2` FOREIGN KEY (`HotelID`) REFERENCES `hotels` (`HotelID`);
+
+--
+-- Constraints for table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
+-- Constraints for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `FK_reservations_hotels` FOREIGN KEY (`RoomID`) REFERENCES `hotels` (`HotelID`),
+  ADD CONSTRAINT `FK_reservations_payment` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`),
+  ADD CONSTRAINT `FK_reservations_user` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
+-- Constraints for table `reserved_rooms`
+--
+ALTER TABLE `reserved_rooms`
+  ADD CONSTRAINT `FK_reserved_rooms_reservation` FOREIGN KEY (`ReservationID`) REFERENCES `reservations` (`id`),
+  ADD CONSTRAINT `FK_reserved_rooms_room` FOREIGN KEY (`RoomID`) REFERENCES `rooms` (`RoomID`);
+
+--
+-- Constraints for table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotels` (`HotelID`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2025-02-04 17:35:16
