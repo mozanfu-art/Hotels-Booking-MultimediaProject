@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Results</title>
+<style>
+/* General Styles */
+body {
+font-family: Arial, sans-serif;
+background-color: #fffbf0;
+margin: 0;
+padding: 0;
+color: #004d40; /* Text color */
+}
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+/* Header Styles */
+.header {
+    background-color: #004d40;
+    color: #ffffff;
+    padding: 10px 20px; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.header .back-arrow {
+    position: absolute;
+    left: 20px;
+}
+.header .home-link {
+    position: absolute;
+    right: 20px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-weight: bold;
+}
+.header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 1.5em; 
+}
+.hotel-list {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+margin-top: 20px;
+}
+.hotel-item {
+background-color: #ffffff;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+padding: 20px;
+width: calc(33.33% - 40px); 
+box-sizing: border-box; 
+display: flex;
+flex-direction: column;
+}
+.hotel-item img {
+width: 100%;
+height: 580px; 
+object-fit: cover; 
+border-radius: 5px 5px 0 0; 
+margin-bottom: 10px;
+}
+.hotel-item h2 {
+color: #004d40;
+margin-bottom: 10px;
+font-size: 1.2em;
+}
+.hotel-item h2 a {
+text-decoration: none; 
+color: inherit;
+}
+.hotel-item h2 a:hover {
+color: #00392e; 
+text-decoration: underline;
+}
+.hotel-item p {
+margin-bottom: 5px;
+font-size: 0.9em;
+}
+.hotel-item img:hover {
+transform: scale(1.05); 
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Filters Styles */
+.filters {
+background-color: #ffffff;
+padding: 20px;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+text-align: center;
+}
+.filters label {
+display: block; 
+margin-bottom: 5px;
+}
+.filters select {
+width: auto; 
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 3px;
+color: #004d40;
+margin: 5px auto;
+}
+/* Footer Styles */
+.footer {
+background-color: #004d40;
+color: #ffffff;
+padding: 20px;
+text-align: center;
+margin-top: 20px;
+border-radius: 5px;
+box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.footer p {
+margin: 0;
+padding-right: 10px;
+}
+.footer a,
+.footer button {
+color: #ffffff;
+text-decoration: none;
+font-weight: bold;
+background: none;
+border: none;
+cursor: pointer;
+}
+.footer a:hover,
+.footer button:hover {
+text-decoration: underline;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <a href="../sign-home/Home-(HB).html"><img src="Back Arrow.png" width="35px"></a>
+        <h1>Search Results</h1>
+        <h3>
+            <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
+        </h3>
+    </div>
+<div class="container">
+<div class="filters">
+<label for="amenities">Filter by Amenities:</label>
+<select id="amenities" onchange="filterHotels()">
+<option value="all">All</option>
+<option value="Gym">Gym</option>
+<option value="Pool">Pool</option>
+<option value="WiFi">WiFi</option>
+<option value="Spa">Spa</option>
+</select>
+</div>
+<div class="hotel-list" id="hotel-list">
+</div>
+</div>
+<footer class="footer">
+<p>&copy; 2025 Hotels Booking. All rights reserved.</p>
+</footer>
+<script>
+const hotels = [
+{
+name: 'Sunrise Hotel',
+location: 'Khartoum, Sudan',
+star_rate: 5,
+description: 'A luxurious hotel with a stunning view of the Nile.',
+amenities: ['Gym', 'Pool', 'WiFi'],
+img: 'sunrise_hotel.jpg',
+infoLink: '../booking-payment-settings/bookingPHP.php' 
+},
+{
+name: 'Desert Oasis',
+location: 'Cairo, Egypt',
+star_rate: 4,
+description: 'A charming hotel near the Pyramids.',
+amenities: ['Spa', 'Pool', 'WiFi'],
+img: 'desert_oasis.jpg',
+infoLink: '../booking-payment-settings/bookingPHP.php' 
+},
+{
+name: 'Mountain Retreat',
+location: 'Addis Ababa, Ethiopia',
+star_rate: 3,
+description: 'A cozy retreat in the mountains.',
+amenities: ['Gym', 'WiFi'],
+img: 'mountain_retreat.jpg',
+infoLink: '../booking-payment-settings/bookingPHP.php' 
+}
+];
+window.onload = function() {
+displayHotels(hotels);
+};
+function displayHotels(hotels) {
+const hotelList = document.getElementById('hotel-list');
+hotelList.innerHTML = '';
+hotels.forEach(hotel => {
+const hotelItem = document.createElement('div');
+hotelItem.className = 'hotel-item';
+hotelItem.innerHTML = `
+<img src="${hotel.img}" alt="${hotel.name}">
+<h2><a href="${hotel.infoLink}">${hotel.name}</a></h2>
+<p>Location: ${hotel.location}</p>
+<p>Star Rating: ${hotel.star_rate} stars</p>
+<p>Description: ${hotel.description}</p>
+<p>Amenities: ${hotel.amenities.join(', ')}</p>
+`;
+hotelList.appendChild(hotelItem);
+});
+}
+function filterHotels() {
+const selectedAmenity = document.getElementById('amenities').value;
+if (selectedAmenity === 'all') {
+displayHotels(hotels);
+} else {
+const filteredHotels = hotels.filter(hotel => hotel.amenities.includes(selectedAmenity));
+displayHotels(filteredHotels);
+}
+}
+</script>
+</body>
+</html>
