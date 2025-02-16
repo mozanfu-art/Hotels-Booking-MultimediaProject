@@ -3,12 +3,12 @@ session_start();
 
 
 if (!isset($_SESSION['UserID'])) {
-    header("Location: ../sign-home/login.php");
+    header("Location: ../sign-home/Start-(HB).html");
     exit();
 }
 
 
-include '../db-connect.php'; 
+include 'db-connect.php'; 
 
 $userID = $_SESSION['UserID'];
 
