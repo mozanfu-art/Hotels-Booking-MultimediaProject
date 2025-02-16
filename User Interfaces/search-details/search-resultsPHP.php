@@ -1,6 +1,12 @@
 <?php
 include 'db-connect.php';
 
+if (!isset($_SESSION['UserID'])) {
+    header("Location: ../sign-home/Start-(HB).html");
+    exit();
+}
+
+
 $hotels = [];
 
 $sql = "SELECT * FROM hotels";
