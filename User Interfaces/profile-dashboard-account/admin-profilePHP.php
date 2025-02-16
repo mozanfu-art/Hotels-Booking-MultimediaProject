@@ -156,9 +156,6 @@ footer {
     <header class="header">
         <a href="../profile-dashboard-account/admin-dashboard.html"><img src="Back Arrow.png" width="35px"></a>
         <h1>Your details</h1>
-        <h3>
-            <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
-        </h3>
     </header>
     
     <div class="container">
