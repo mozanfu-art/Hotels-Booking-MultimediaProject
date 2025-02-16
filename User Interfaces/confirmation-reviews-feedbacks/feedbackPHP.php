@@ -15,16 +15,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $UserID) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $feedback_type = $_POST['AppRate'];
-    $feedback_text = $_POST['feedback'];
+    $feedback_text = $_POST['feedback_text'];
 
-    $stmt = $conn->prepare("INSERT INTO feedback (UserID, AppRate, feedback, FeedbackDate) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("iss", $user_id, $feedback_type, $feedback_text);
+    $stmt = $conn->prepare("INSERT INTO feedback (UserID, Feedback, AppRate) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $userID, $feedback_text, $feedback_type);
     $stmt->execute();
     $stmt->close();
 
-    header("Location: ./feedbackPHP.php");
+    header("Location: ../sign-home/Home-(HB).html");
     exit();
 }
 ?>
@@ -173,7 +173,7 @@ footer {
     <div class="section-reviews">
         <h3>How do you rate our app?</h3>
         <h3>Can you tell us a little more?</h3>
-        <form method="POST" action="../sign-home/Home-(HB).html">
+        <form method="POST" action="">
             <label for="AppRate">Select feedback type</label>
             <select name="AppRate" required>
                 <option value="very-bad">Very Bad</option>
