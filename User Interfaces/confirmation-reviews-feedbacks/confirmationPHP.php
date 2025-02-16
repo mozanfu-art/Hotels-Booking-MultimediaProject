@@ -228,7 +228,7 @@ $conn->close();
             <td class="yellow-bg">This booking is non-refundable.</td>
         </tr>
     </table>
-    <a href="../confirmation-reviews-feedbacks/feedback.html" class="reviews-policy-button">
+    <a href="../confirmation-reviews-feedbacks/feedbackPHP.php" class="reviews-policy-button">
         Give our app a feedback?
     </a>
     <footer>
