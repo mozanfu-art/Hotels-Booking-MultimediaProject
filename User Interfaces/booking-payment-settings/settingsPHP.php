@@ -2,11 +2,11 @@
 session_start();
 
 if (!isset($_SESSION['UserID'])) {
-    header("Location: ../sign-home/login.php");
+    header("Location: ../sign-home/Start-(HB).html");
     exit();
 }
 
-include '../db-connect.php'; 
+include 'db-connect.php'; 
 $UserID = $_SESSION['UserID'];
 
 $query = "SELECT theme, currency, lang, email_notifications, sms_notifications FROM users WHERE UserID = ?";
