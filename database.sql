@@ -43,20 +43,21 @@ CREATE TABLE `existing_reservations` (
 -- Table structure for table `feedback`
 --
 
-CREATE TABLE `feedback` (
-  `RateID` int(11) NOT NULL,
-  `UserID` int(11) DEFAULT NULL,
-  `Feedback` text DEFAULT NULL,
-  `FeedbackDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `AppRate` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `RateID` int NOT NULL AUTO_INCREMENT,
+  `UserID` int DEFAULT NULL,
+  `Feedback` text COLLATE utf8mb4_general_ci,
+  `AppRate` text COLLATE utf8mb4_general_ci,
+  PRIMARY KEY (`RateID`),
+  UNIQUE KEY `UserID_2` (`UserID`),
+  KEY `UserID` (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Dumping data for table `feedback`
 --
-
-INSERT INTO `feedback` (`RateID`, `UserID`, `Feedback`, `FeedbackDate`, `AppRate`) VALUES
-(1, 3, 'Great experience!', '2025-02-03 16:07:47', 5);
 
 -- --------------------------------------------------------
 
@@ -300,15 +301,7 @@ ALTER TABLE `existing_reservations`
   ADD PRIMARY KEY (`ReservationID`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `ReviewID` (`ReviewID`);
-
---
--- Indexes for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`RateID`),
-  ADD UNIQUE KEY `UserID_2` (`UserID`),
-  ADD KEY `UserID` (`UserID`);
-
+  
 --
 -- Indexes for table `hotels`
 --
