@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `Feedback` text COLLATE utf8mb4_general_ci,
   `AppRate` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`RateID`),
-  UNIQUE KEY `UserID_2` (`UserID`),
   KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -109,10 +108,6 @@ CREATE TABLE `hotel_reviews` (
 -- Dumping data for table `hotel_reviews`
 --
 
-INSERT INTO `hotel_reviews` (`created_at`, `full_name`, `user_email`, `review_text`, `ReviewID`, `UserID`, `HotelID`, `Star_rate`, `Review`, `ReviewDate`) VALUES
-(NULL, 'ali', 'aliew123@gmail.com', 'sdlkfnsdv sdjfsl;dff sdlkfsdmf', 2, NULL, NULL, 3, NULL, '2025-02-14 15:26:00'),
-('2025-02-14', 'asdas', 'asfva@fsedsdf.com', 'fosdjkflsdf', 3, NULL, NULL, 4, NULL, '2025-02-14 15:28:40'),
-('2025-02-14', 'ahmed', 'asfva@fseddsfsdfsdf.com', 'fewgbnrsfdsgsdg', 4, NULL, NULL, 5, NULL, '2025-02-14 15:35:54');
 
 -- --------------------------------------------------------
 
