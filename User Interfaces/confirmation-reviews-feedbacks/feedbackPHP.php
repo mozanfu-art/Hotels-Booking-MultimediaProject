@@ -164,7 +164,7 @@ footer {
 </head>
 <body>
     <div class="header">
-        <a href="../profile-dashboard-account/manage-accountPHP.php"><img src="Back Arrow.png" width="35px"></a>
+        <a href="../profile-dashboard-account/manage-account.html"><img src="Back Arrow.png" width="35px"></a>
         <h1>Give App Feedback</h1>
         <h3>
             <a href="../sign-home/Home-(HB).html" class="home-link">Home</a>
