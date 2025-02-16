@@ -1,11 +1,19 @@
 <?php
 include 'db-connect.php';
 
+session_start();
+
+
 if (!isset($_SESSION['UserID'])) {
     header("Location: ../sign-home/Start-(HB).html");
     exit();
 }
 
+$userID = $_SESSION['UserID'];
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $hotels = [];
 
