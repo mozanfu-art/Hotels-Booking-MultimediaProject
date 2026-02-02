@@ -10,12 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // User found
+        
         $row = $result->fetch_assoc();
         $_SESSION['UserID'] = $row['UserID'];
         $_SESSION['Role'] = $row['Role'];
 
-        // Redirect based on user role
         if ($row['Role'] == 'Admin') {
             header("Location: ../profile-dashboard-account/admin-dashboard.html");
         } else {

@@ -67,15 +67,34 @@ function createResponsePage($mess, $subMess, $btn, $PLink)
             color: #004d40;
             border: 1px groove #004d40;
         }
+
+        #success-animation {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
     </style>
     <body>
         <div class='container'>
+        <div id='success-animation'></div>
             <font color='#004d40' size='7'>$mess</font><br>
             <font color='#004d40' size='7'>$subMess</font>
             <form action='$PLink'>
                 <p><input type='submit' class='btn' value='$btn' /></p>
             </form>
         </div>
+         </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js'></script>
+        <script>
+            lottie.loadAnimation({
+                container: document.getElementById('success-animation'),
+                path: './json/login1.json',
+                renderer: 'svg',
+                loop: false,
+                autoplay: true
+            });
+        </script>
     </body>
     </html>
     ";

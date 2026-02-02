@@ -90,6 +90,34 @@ INSERT INTO `hotels` (`HotelID`, `Hotel_name`, `Country`, `City`, `Address`, `St
 --
 -- Table structure for table `hotel_reviews`
 --
+CREATE TABLE hotel_files (
+  FileID INT AUTO_INCREMENT PRIMARY KEY,
+  HotelID INT NOT NULL,
+  FileType ENUM('image', 'video', 'audio', 'animation') NOT NULL,
+  FilePath TEXT NOT NULL,
+  FOREIGN KEY (HotelID) REFERENCES hotels(HotelID)
+);
+
+INSERT INTO hotel_files (HotelID, FileType, FilePath) VALUES
+(1, 'image', 'pic1.png'),
+(2, 'image', 'pic2.png'),
+(3, 'image', 'pic3.png'),
+(1, 'image', 'pic4.png'),
+(1, 'image', 'pic5.jpg'),
+(2, 'image', 'pic6.jpg'),
+(3, 'image', 'pic7.jpg'),
+(1, 'image', 'pic8.jpg'),
+(1, 'video', 'video2.mp4'),
+(2, 'video', 'desert-oasis.mp4'),
+(3, 'video', 'mountain-retreat.mp4'),
+(1, 'video', 'sunrise-hotel.mp4'),
+(1, 'audio', 'Background-Music.mp3'),
+(1, 'animation', 'Animation2.json'),
+(2, 'animation', 'welcome2.json'),
+(3, 'animation', 'google.json'),
+(1, 'animation', 'facebook.json'),
+(2, 'animation', 'bell2.json'),
+(3, 'animation', 'login3.json');
 
 CREATE TABLE `hotel_reviews` (
   `created_at` date DEFAULT NULL,
