@@ -1,2 +1,5 @@
 [static]
 directory = "public"
+
+[deploy]
+healthcheckPath = "/index.html"
