@@ -1,7 +1,4 @@
 # railway.toml
 
-[build]
-builder = "Node"
-
 [start]
-command = "node server.js"
+command = "npm run start"
