@@ -4,9 +4,9 @@
   "description": "Minimal TypeScript ChatGPT App with MCP SDK",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "dev": "ts-node src/server.ts"
+  "build": "npx tsc",
+  "start": "node dist/server.js",
+  "dev": "ts-node src/server.ts"
   },
   "dependencies": {
     "express": "^4.18.2",
