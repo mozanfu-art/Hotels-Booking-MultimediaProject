@@ -1,4 +1,5 @@
-# railway.toml
+[build]
+command = "npm run build"
 
 [start]
 command = "npm run start"
