@@ -1,0 +1,214 @@
+<html>
+<head>
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #004d40;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            margin: 0;
+            position: relative;
+        }
+
+        .bar {
+            width: 100%;
+            height: 40px;
+            background-color: #004d40;
+        }
+
+        .container-wrapper {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin-left: 120px; /
+        }
+
+        .icon-container {
+            position: absolute;
+            left: -100px; 
+            top: 10%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: row;
+        }
+
+        .top-icons {
+            display: flex;
+        }
+
+        .icon-animation {
+            width: 300px; 
+            height: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .icon-animation:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px rgba(255, 251, 240, 0.8));
+        }
+
+        .container {
+            background-color: white;
+            width: 35%;
+            height: auto;
+            margin: 20px auto;
+            text-align: center;
+            padding: 5px 0px;
+            box-shadow: 0px 0px 0px rgb(0, 0, 0, 0.5);
+            border: 0px;
+            border-radius: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container label {
+            margin-right: 55%;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        .txt {
+            width: 40%;
+            height: 40px;
+            color: #004d40;
+        }
+
+        .input {
+            border: 1px solid #004d40;
+            border-radius: 1px;
+            border-width: 1px;
+            padding: 4px;
+            width: 70%;
+            height: 40px;
+            color: #004d40;
+            background-color: #fffbf0;
+        }
+
+        .input:hover {
+            border: 3px solid #004d40;
+        }
+
+        .btn {
+            width: 20%;
+            height: 60px;
+            background: #004d40;
+            color: #fffbf0;
+            border: none;
+        }
+
+        #header-animation {
+            width: 250px !important;
+            height: 250px !important;
+            margin: 0 auto;
+            margin-bottom: -90px;
+            margin-top: -50px;  
+        }
+
+        .btn:hover {
+            background: #fffbf0;
+            color: #004d40;
+            border: 1px groove #004d40;
+        }
+
+        ::placeholder {
+            color: #004d40;
+            opacity: 1;
+        }
+
+        footer {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            position: relative;
+            margin-top: auto;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="bar">
+        <a href="./Start-(HB).html"><img src="./Icon/Back Arrow.png" width="35px"></a>
+    </div>
+    
+    <div class="container-wrapper">
+        <div class="icon-container">
+            <div class="top-icons">
+                <div id="welcome-icon" class="icon-animation"></div>
+                <div id="bell-icon" class="icon-animation"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="header-animation"></div>
+            <h1><font color="#004d40">Create Your Account</font></h1>
+            <form action="./signUp-db.php" method="POST">
+                <p><input type="txt" required="true" placeholder="First Name" name="FN" style="width:35%;" class="input">
+                   <input type="txt" required="true" placeholder="Last Name" name="LN" style="width:35%;" class="input">
+                </p>
+                <p><input type="email" required="true" name="Email" placeholder="Email" class="input"></p>
+                <p><input class="input" id="password" name="password" type="password" pattern="^\S{6,}$"
+                       onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.pass.pattern = this.value;"
+                       placeholder="Password" required></p>
+                <p><input class="input" id="pass" name="pass" type="password" pattern="^\S{6,}$"
+                       onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                       placeholder="Confirm Password" required></p>
+                <p><input type="tel" required="true" name="Num" placeholder="Phone Number" class="input"></p>
+                <label for="DOB">Birth Date</label>
+                <input type="date" required name="DOB" id="dob" class="input">
+                <p><input type="submit" class="btn" style="width:70%;height:40px;" value="Create"></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Hotels Booking. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+    <script>
+        lottie.loadAnimation({
+            container: document.getElementById("header-animation"),
+            path: "./json/login3.json",
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            rendererSettings: {
+            preserveAspectRatio: "xMidYMid meet"
+            }
+        });
+        const loadIcon = (elementId, path) => {
+            const anim = lottie.loadAnimation({
+                container: document.getElementById(elementId),
+                path: path,
+                renderer: "svg",
+                loop: true,
+                autoplay: true,
+                rendererSettings: {
+                preserveAspectRatio: "xMidYMid meet"
+                }
+            });
+            document.getElementById(elementId).addEventListener('mouseenter', () => {
+                anim.setSpeed(1.5);
+            });
+            document.getElementById(elementId).addEventListener('mouseleave', () => {
+                anim.setSpeed(1);
+            });
+        };
+        loadIcon("welcome-icon", "./json/welcome2.json");
+        loadIcon("bell-icon", "./json/bell2.json");
+
+        const dobInput = document.getElementById('dob');
+        const today = new Date().toISOString().split('T')[0];
+        dobInput.max = today;
+        dobInput.addEventListener('change', function() {
+           if (new Date(dobInput.value) > new Date(today)) {
+              dobInput.value = '';
+        }
+        });
+    </script>
+</body>
+</html>

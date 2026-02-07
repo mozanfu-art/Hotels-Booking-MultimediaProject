@@ -1,2 +1,7 @@
-[deploy]
-rootDirectory = "User Interfaces/sign-home"
+# railway.toml
+
+[build]
+builder = "nodejs"
+
+[start]
+command = "node server.js"
