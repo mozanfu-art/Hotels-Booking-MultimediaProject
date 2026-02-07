@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "cd app && npm run build"
 
 [start]
-command = "npm run start"
+command = "cd app && npm run start"
