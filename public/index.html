@@ -1,81 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Movers</title>
-  <style>
-    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-    @media (max-width: 600px) {
-      table, th, td { display: block; }
-      th { display: none; }
-      td { border: none; position: relative; padding-left: 50%; }
-      td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-      }
-    }
-  </style>
+    <title>WELCOME</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("./IMG/welcome-BG.jpg");
+            background-origin: content-box;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            background-position: center;
+            margin: 0;
+        }
+
+        .btn {
+        width: 200px;       
+        height: 60px;       
+        padding: 0;         
+        background: #fffbf0;
+        color: black;
+        border-radius: 30px; 
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        line-height: 60px;  
+        box-sizing: border-box; 
+        opacity: 0;
+        transform: scale(1);
+        animation: 
+            fadeIn 1s 3s forwards,
+            pulse 2s infinite 4s;
+        }
+
+        .btn:hover {
+        box-shadow: 0 0 15px rgba(255, 251, 240, 0.8);
+        }
+
+        h1 {
+            opacity: 0;
+            animation: 
+            fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Top Movers</h1>
-
-  <h2>Top Gainers</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Ticker</th>
-        <th>Price</th>
-        <th>Change</th>
-        <th>Change Percent</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Ticker">AAPL</td>
-        <td data-label="Price">$180</td>
-        <td data-label="Change">+5</td>
-        <td data-label="Change Percent">+2.8%</td>
-      </tr>
-      <tr>
-        <td data-label="Ticker">MSFT</td>
-        <td data-label="Price">$320</td>
-        <td data-label="Change">+12</td>
-        <td data-label="Change Percent">+3.9%</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>Top Losers</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Ticker</th>
-        <th>Price</th>
-        <th>Change</th>
-        <th>Change Percent</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Ticker">TSLA</td>
-        <td data-label="Price">$700</td>
-        <td data-label="Change">-20</td>
-        <td data-label="Change Percent">-2.8%</td>
-      </tr>
-      <tr>
-        <td data-label="Ticker">NFLX</td>
-        <td data-label="Price">$400</td>
-        <td data-label="Change">-15</td>
-        <td data-label="Change Percent">-3.6%</td>
-      </tr>
-    </tbody>
-  </table>
+    <audio src="./music/Background-Music.mp3" autoplay loop hidden>
+        Your browser does not support the audio element.
+    </audio>
+    <br><br><br>
+    <h1 style="margin-left: 70px; color: white; font-size: 30; animation-delay: 0.5s">WELCOME TO</h1>
+    <h1 style="font-size: 450%; margin-left: 70px; color: white; animation-delay: 1s">HotelS</h1>
+    <h1 style="font-size: 450%; margin-left: 70px; color: white; size: 20; animation-delay: 1.5s">BOOKING</h1>
+    <h1 style="font-size: 150%; margin-left: 40px; color: white; size: 4; animation-delay: 2s">EXPLORE</h1>
+    <h1 style="font-size: 150%; margin-left: 40px; color: white; size: 4; animation-delay: 2.3s">BOOK YOUR STAY NOW</h1>
+    <h1 style="font-size: 150%; margin-left: 40px; color: white; size: 4; animation-delay: 2.6s">ENJOY!</h1>
+    <br>
+    <center>
+        <h4><br><br><a href="./Start-(HB).html" class="btn">Get Started Now</a></h4>
+    </center>
 </body>
-</html>
+</html> 
