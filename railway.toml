@@ -1,7 +1,7 @@
 # railway.toml
 
 [build]
-builder = "nodejs"
+builder = "Node"
 
 [start]
 command = "node server.js"
