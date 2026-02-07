@@ -8,43 +8,74 @@
     table { width: 100%; border-collapse: collapse; margin: 20px 0; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     th { background-color: #f2f2f2; }
-    @media (max-width: 600px) { table, th, td { display: block; } th { display: none; } td { border: none; position: relative; padding-left: 50%; } td:before { content: attr(data-label); position: absolute; left: 6px; width: 45%; padding-right: 10px; white-space: nowrap; } }
+    @media (max-width: 600px) {
+      table, th, td { display: block; }
+      th { display: none; }
+      td { border: none; position: relative; padding-left: 50%; }
+      td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>Top Movers</h1>
-  <div id="gainers"></div>
-  <div id="losers"></div>
-  <script>
-    window.openai = {
-      callTool: async (name, args) => {
-        const res = await fetch('/topMovers', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(args)
-        });
-        return res.json();
-      }
-    };
 
-    async function loadData() {
-      try {
-        const data = await window.openai.callTool('topMovers', { limit: 10 });
-        renderTable('gainers', 'Top Gainers', data.gainers);
-        renderTable('losers', 'Top Losers', data.losers);
-      } catch (error) {
-        console.error('Error loading data:', error);
-      }
-    }
+  <h2>Top Gainers</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Price</th>
+        <th>Change</th>
+        <th>Change Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Ticker">AAPL</td>
+        <td data-label="Price">$180</td>
+        <td data-label="Change">+5</td>
+        <td data-label="Change Percent">+2.8%</td>
+      </tr>
+      <tr>
+        <td data-label="Ticker">MSFT</td>
+        <td data-label="Price">$320</td>
+        <td data-label="Change">+12</td>
+        <td data-label="Change Percent">+3.9%</td>
+      </tr>
+    </tbody>
+  </table>
 
-    function renderTable(id, title, items) {
-      const container = document.getElementById(id);
-      container.innerHTML = `<h2>${title}</h2><table><thead><tr><th>Ticker</th><th>Price</th><th>Change</th><th>Change Percent</th></tr></thead><tbody>${
-        items.map(item => `<tr><td data-label="Ticker">${item.ticker}</td><td data-label="Price">${item.price}</td><td data-label="Change">${item.change_amount}</td><td data-label="Change Percent">${item.change_percentage}</td></tr>`).join('')
-      }</tbody></table>`;
-    }
-
-    loadData();
-  </script>
+  <h2>Top Losers</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Price</th>
+        <th>Change</th>
+        <th>Change Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Ticker">TSLA</td>
+        <td data-label="Price">$700</td>
+        <td data-label="Change">-20</td>
+        <td data-label="Change Percent">-2.8%</td>
+      </tr>
+      <tr>
+        <td data-label="Ticker">NFLX</td>
+        <td data-label="Price">$400</td>
+        <td data-label="Change">-15</td>
+        <td data-label="Change Percent">-3.6%</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

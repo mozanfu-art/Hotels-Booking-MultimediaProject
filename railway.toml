@@ -1,5 +1,2 @@
-[build]
-command = "cd app && node node_modules/typescript/lib/tsc.js"
-
-[start]
-command = "cd app && npm run start"
+[static]
+directory = "public"
