@@ -1,5 +1,2 @@
-[build]
-command = "cd app && npm run build"
-
 [start]
 command = "cd app && npm run start"
